@@ -1,0 +1,48 @@
+name: ROS
+
+on:
+  push:
+    branches: [dashing]
+  workflow_dispatch:
+    
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container: athackst/ros2:dashing-dev
+    steps:
+      - uses: actions/checkout@v2
+      - name: "Get workspace"
+        run: |
+          if [ -f src/.rosinstall ]; then
+            vcs import --skip-existing < src/.rosinstall src
+          fi
+      - name: "Get dependencies"
+        run: |
+          sudo apt-get update
+          rosdep update
+          rosdep install --from-paths src --ignore-src -y --rosdistro=dashing
+      - name: "Build"
+        run: |
+          colcon build --cmake-args '-DCMAKE_BUILD_TYPE=RelWithDebInfo' -Wall -Wextra -Wpedantic
+        continue-on-error: true
+      - name: "Test"
+        run: |
+          colcon test
+  lint:
+    name: ament_${{ matrix.linter }}
+    runs-on: ubuntu-latest
+    container: athackst/ros2:dashing-dev
+    strategy:
+      fail-fast: false
+      matrix:
+          linter: [cppcheck, cpplint, uncrustify, lint_cmake, xmllint, flake8, pep257]
+    steps:
+      - uses: actions/checkout@v2
+      - name: "Get workspace"
+        run: |
+          if [ -f src/.rosinstall ]; then
+            vcs import --skip-existing < src/.rosinstall src
+          fi
+      - name: "run linter"
+        run: |
+          ament_${{ matrix.linter }} src/

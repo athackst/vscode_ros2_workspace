@@ -1,0 +1,10 @@
+# List of repositories to use within your workspace
+# See https://github.com/dirk-thomas/vcstool
+############ 
+# Example:
+############
+repositories:
+  examples:
+    type: git
+    url: https://github.com/athackst/examples.git
+    version: dashing

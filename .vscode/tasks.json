@@ -1,0 +1,145 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        // Build tasks
+        {
+            "label": "build",
+            "detail": "Build workspace (default)",
+            "type": "shell",
+            "command": "colcon build --cmake-args '-DCMAKE_BUILD_TYPE=RelWithDebInfo' -Wall -Wextra -Wpedantic",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": "$gcc"
+        },
+        // Test tasks
+        {
+            "label": "test",
+            "detail": "Run all unit tests and show results.",
+            "type": "shell",
+            "command": "colcon test && colcon test-result",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        },
+        // Clean
+        {
+            "label": "clean",
+            "detail": "Run the clean target",
+            "type": "shell",
+            "command": "colcon build --cmake-target clean",
+            "problemMatcher": "$gcc"
+        },
+        {
+            "label": "reset",
+            "detail": "Reset workspace by deleting all generated files.",
+            "type": "shell",
+            "command": "rm -fr build install log; py3clean .",
+            "problemMatcher": []
+        },
+        // Linting and static code analysis tasks
+        {
+            "label": "cpplint",
+            "detail": "Lint files with cpplint.",
+            "type": "shell",
+            "command": "ament_cpplint src/",
+            "problemMatcher": []
+        },
+        {
+            "label": "uncrustify",
+            "detail": "Lint files with uncrustify.",
+            "type": "shell",
+            "command": "ament_uncrustify src/",
+            "problemMatcher": []
+        },
+        {
+            "label": "fix",
+            "detail": "Reformat files with uncrustify.",
+            "type": "shell",
+            "command": "ament_uncrustify --reformat src/",
+            "problemMatcher": []
+        },
+        {
+            "label": "cppcheck",
+            "detail": "Run static code checker cppcheck.",
+            "type": "shell",
+            "command": "ament_cppcheck src/",
+            "problemMatcher": []
+        },
+        {
+            "label": "lint_cmake",
+            "detail": "Run lint on cmake files.",
+            "type": "shell",
+            "command": "ament_lint_cmake src/",
+            "problemMatcher": []
+        },
+        {
+            "label": "flake8",
+            "detail": "Run flake8 on python files.",
+            "type": "shell",
+            "command": "ament_flake8 src/",
+            "problemMatcher": []
+        },
+        {
+            "label": "pep257",
+            "detail": "Run pep257 on python files.",
+            "type": "shell",
+            "command": "ament_pep257 src/",
+            "problemMatcher": []
+        },
+        {
+            "label": "xmllint",
+            "detail": "Run xmllint on xml files.",
+            "type": "shell",
+            "command": "ament_xmllint src/",
+            "problemMatcher": []
+        },
+        // Workspace editing tasks
+        {
+            "label": "new ament_cmake package",
+            "detail": "Create a new ROS cpp package from a template.",
+            "type": "shell",
+            "command": "ros2 pkg create --destination-directory src --build-type ament_cmake ${input:package}",
+            "problemMatcher": []
+        },
+        {
+            "label": "new ament_python package",
+            "detail": "Create a new ROS python package from a template.",
+            "type": "shell",
+            "command": "ros2 pkg create --destination-directory src --build-type ament_python ${input:package}",
+            "problemMatcher": []
+        },
+        {
+            "label": "import from workspace file",
+            "detail": "Use vcs to import modules specified by a workspace/rosinstall file.",
+            "type": "shell",
+            "command": "vcs import < src/.rosinstall src",
+            "problemMatcher": []
+        },
+        {
+            "label": "update workspace file",
+            "detail": "Use vcs to update repositories in src to workspace file.",
+            "type": "shell",
+            "command": "vcs export src > src/.rosinstall",
+            "problemMatcher": []
+        },
+        {
+            "label": "install dependencies",
+            "detail": "Install all dependencies specified in the workspaces package.xml files.",
+            "type": "shell",
+            "command": "sudo apt-get update && rosdep update && rosdep install --from-paths src --ignore-src -y",
+            "problemMatcher": []
+        }
+    ],
+    "inputs": [
+        {
+          "id": "package",
+          "type": "promptString",
+          "description": "Package name"
+        }
+      ]
+}

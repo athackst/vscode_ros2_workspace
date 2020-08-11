@@ -1,0 +1,24 @@
+{
+    "C_Cpp.default.intelliSenseMode": "clang-x64",
+    "C_Cpp.clang_format_fallbackStyle": "Google",
+    "editor.tabSize": 8,
+    "files.associations": {
+        ".rosinstall": "yaml",
+        "*.world": "xml",
+        "*.xacro": "xml",
+    },
+    "python.autoComplete.extraPaths": [
+        "/opt/ros/dashing/lib/python3.8/site-packages"
+    ],
+    "editor.rulers": [
+        100
+    ],
+    "editor.defaultFormatter": "LaurentTreguier.uncrustify",
+    "uncrustify.configPath.linux": "/opt/ros/dashing/lib/python3.8/site-packages/ament_uncrustify/configuration/ament_code_style.cfg",
+    "cSpell.words": [
+        "rclcpp"
+    ],
+    "python.formatting.autopep8Args": [
+        "--max-line-length=100"
+    ],
+}
