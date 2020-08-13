@@ -8,13 +8,13 @@
         "*.xacro": "xml",
     },
     "python.autoComplete.extraPaths": [
-        "/opt/ros/dashing/lib/python3.8/site-packages"
+        "/opt/ros/eloquent/lib/python3.8/site-packages"
     ],
     "editor.rulers": [
         100
     ],
     "editor.defaultFormatter": "LaurentTreguier.uncrustify",
-    "uncrustify.configPath.linux": "/opt/ros/dashing/lib/python3.8/site-packages/ament_uncrustify/configuration/ament_code_style.cfg",
+    "uncrustify.configPath.linux": "/opt/ros/eloquent/lib/python3.8/site-packages/ament_uncrustify/configuration/ament_code_style.cfg",
     "cSpell.words": [
         "rclcpp"
     ],

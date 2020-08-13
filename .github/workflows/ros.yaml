@@ -2,13 +2,13 @@ name: ROS
 
 on:
   push:
-    branches: [dashing]
+    branches: [eloquent]
   workflow_dispatch:
     
 jobs:
   test:
     runs-on: ubuntu-latest
-    container: athackst/ros2:dashing-dev
+    container: athackst/ros2:eloquent-dev
     steps:
       - uses: actions/checkout@v2
       - name: "Get workspace"
@@ -20,7 +20,7 @@ jobs:
         run: |
           sudo apt-get update
           rosdep update
-          rosdep install --from-paths src --ignore-src -y --rosdistro=dashing
+          rosdep install --from-paths src --ignore-src -y --rosdistro=eloquent
       - name: "Build"
         run: |
           colcon build --cmake-args '-DCMAKE_BUILD_TYPE=RelWithDebInfo' -Wall -Wextra -Wpedantic
@@ -31,7 +31,7 @@ jobs:
   lint:
     name: ament_${{ matrix.linter }}
     runs-on: ubuntu-latest
-    container: athackst/ros2:dashing-dev
+    container: athackst/ros2:eloquent-dev
     strategy:
       fail-fast: false
       matrix:
