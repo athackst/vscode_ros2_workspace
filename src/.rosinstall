@@ -7,4 +7,4 @@ repositories:
   examples:
     type: git
     url: https://github.com/athackst/examples.git
-    version: dashing
+    version: foxy
