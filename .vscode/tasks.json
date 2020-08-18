@@ -117,14 +117,14 @@
             "label": "import from workspace file",
             "detail": "Use vcs to import modules specified by a workspace/rosinstall file.",
             "type": "shell",
-            "command": "vcs import < src/.rosinstall src",
+            "command": "vcs import < src/ros2.repos src",
             "problemMatcher": []
         },
         {
             "label": "update workspace file",
             "detail": "Use vcs to update repositories in src to workspace file.",
             "type": "shell",
-            "command": "vcs export src > src/.rosinstall",
+            "command": "vcs export src > src/ros2.repos",
             "problemMatcher": []
         },
         {

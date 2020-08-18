@@ -6,8 +6,8 @@ See [how I develop with vscode and ros2](https://www.allisonthackston.com/articl
 
 ## How to use this template
 
-1. Specify the repositories you want to include in your workspace in `src/.rosinstall` or delete `src/.rosinstall` and develop directly within the workspace.
-   1. If you are using a `.rosinstall` file, import the contents `Terminal->Run Task..->import from workspace file`
+1. Specify the repositories you want to include in your workspace in `src/ros2.repos` or delete `src/ros2.repos` and develop directly within the workspace.
+   1. If you are using a `ros2.repos` file, import the contents `Terminal->Run Task..->import from workspace file`
 2. Install dependencies `Terminal->Run Task..->install dependencies`
 3. Develop!
 
