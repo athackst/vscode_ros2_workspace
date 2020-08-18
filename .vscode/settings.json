@@ -3,7 +3,7 @@
     "C_Cpp.clang_format_fallbackStyle": "Google",
     "editor.tabSize": 8,
     "files.associations": {
-        ".rosinstall": "yaml",
+        "*.repos": "yaml",
         "*.world": "xml",
         "*.xacro": "xml",
     },
@@ -16,7 +16,16 @@
     "editor.defaultFormatter": "LaurentTreguier.uncrustify",
     "uncrustify.configPath.linux": "/opt/ros/foxy/lib/python3.8/site-packages/ament_uncrustify/configuration/ament_code_style.cfg",
     "cSpell.words": [
-        "rclcpp"
+        "autopep",
+        "cmake",
+        "cppcheck",
+        "cpplint",
+        "pytest",
+        "rclcpp",
+        "rclpy",
+        "repos",
+        "uncrustify",
+        "xmllint"
     ],
     "python.formatting.autopep8Args": [
         "--max-line-length=100"
