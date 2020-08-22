@@ -30,4 +30,12 @@
     "python.formatting.autopep8Args": [
         "--max-line-length=100"
     ],
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/bower_components": true,
+        "**/*.code-search": true,
+        "**/build": true,
+        "**/install": true,
+        "**/log": true
+    }
 }
