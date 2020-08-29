@@ -20,7 +20,7 @@
             "label": "test",
             "detail": "Run all unit tests and show results.",
             "type": "shell",
-            "command": "colcon test && colcon test-result",
+            "command": "colcon test; colcon test-result",
             "group": {
                 "kind": "test",
                 "isDefault": true
@@ -96,6 +96,12 @@
             "detail": "Run xmllint on xml files.",
             "type": "shell",
             "command": "ament_xmllint src/",
+            "problemMatcher": []
+        },
+        {
+            "label": "lint all",
+            "detail": "Run all linters.",
+            "dependsOn":["cppcheck", "cpplint", "flake8", "lint_cmake", "pep257","uncrustify", "xmllint"],
             "problemMatcher": []
         },
         // Workspace editing tasks
