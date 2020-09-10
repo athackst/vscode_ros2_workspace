@@ -5,10 +5,10 @@
     "files.associations": {
         "*.repos": "yaml",
         "*.world": "xml",
-        "*.xacro": "xml",
+        "*.xacro": "xml"
     },
     "python.autoComplete.extraPaths": [
-        "/opt/ros/foxy/lib/python3.8/site-packages"
+        "/opt/ros/foxy/lib/python3.8/site-packages/"
     ],
     "editor.rulers": [
         100
