@@ -54,7 +54,27 @@
             "detail": "Lint files with uncrustify.",
             "type": "shell",
             "command": "ament_uncrustify src/",
-            "problemMatcher": []
+            "presentation": {
+                "panel": "dedicated",
+                "reveal": "silent",
+                "clear": true
+            },
+            "problemMatcher": [
+                {
+                    "owner": "uncrustify",
+                    "source": " uncrustify",
+                    "fileLocation": "relative",
+                    "pattern": [
+                    /// just the file name message
+                        {
+                            "regexp": "^(.*)'(.*)':",
+                            "kind": "file",
+                            "file": 2,
+                            "message": 1
+                        },
+                  ]
+                }
+            ]
         },
         {
             "label": "cpplint",
@@ -154,7 +174,7 @@
                       "file": 1,
                       "line": 2,
                       "message": 5,
-                      "regexp": "^([^:]*):(\\d+):(\\d+): (\\w+\\d\\d\\d) (.*)$"
+                      "regexp": "^(.+):(\\d+):(\\d+): (\\w\\d+) (.+)$"
                     }
                   ]
                 }
@@ -216,7 +236,7 @@
         {
             "label": "lint all",
             "detail": "Run all linters.",
-            "dependsOn":["cppcheck", "cpplint", "flake8", "lint_cmake", "pep257","xmllint"],
+            "dependsOn":["cppcheck", "cpplint", "flake8", "lint_cmake", "pep257","xmllint", "uncrustify"],
             "problemMatcher": []
         },
         // Workspace editing tasks
