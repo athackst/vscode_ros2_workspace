@@ -1,6 +1,5 @@
 {
     "C_Cpp.default.intelliSenseMode": "clang-x64",
-    "C_Cpp.clang_format_fallbackStyle": "Google",
     "editor.tabSize": 8,
     "files.associations": {
         "*.repos": "yaml",
@@ -14,7 +13,12 @@
         100
     ],
     "editor.defaultFormatter": "LaurentTreguier.uncrustify",
+    "C_Cpp.formatting": "Disabled",
+    "uncrustify.useReplaceOption": true,
     "uncrustify.configPath.linux": "/opt/ros/foxy/lib/python3.8/site-packages/ament_uncrustify/configuration/ament_code_style.cfg",
+    "[cpp]": {
+        "editor.defaultFormatter": "LaurentTreguier.uncrustify"
+    },
     "cSpell.words": [
         "autopep",
         "cmake",
