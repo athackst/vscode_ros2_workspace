@@ -28,10 +28,14 @@
         "editor.defaultFormatter": "LaurentTreguier.uncrustify"
     },
     "cSpell.words": [
+        "athackst",
         "autopep",
         "cmake",
         "cppcheck",
         "cpplint",
+        "deque",
+        "devcontainer",
+        "ints",
         "noqa",
         "pytest",
         "rclcpp",

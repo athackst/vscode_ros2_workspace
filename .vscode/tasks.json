@@ -20,7 +20,7 @@
             "label": "test",
             "detail": "Run all unit tests and show results.",
             "type": "shell",
-            "command": "colcon test; colcon test-result",
+            "command": "colcon test --merge-install; colcon test-result",
             "group": {
                 "kind": "test",
                 "isDefault": true
@@ -35,8 +35,8 @@
             "problemMatcher": "$gcc"
         },
         {
-            "label": "reset",
-            "detail": "Reset workspace by deleting all generated files.",
+            "label": "purge",
+            "detail": "Purge workspace by deleting all generated files.",
             "type": "shell",
             "command": "rm -fr build install log; py3clean .",
             "problemMatcher": []
