@@ -94,7 +94,7 @@ VSCode will build the dockerfile inside of `.devcontainer` for you.  If you open
 3. Develop!
 
 
-### enable GPU acceleration
+### Enable GPU acceleration
 
 Error messages that show lacking GPU acceleration (in docker terminal) 
 
@@ -111,15 +111,15 @@ results in:
    Current serial number in output stream:  47
 
 
-1. check that nvidia drivers are current on the host with 
+1. Check that nvidia drivers are current on the host with 
 
-$ nvidia-smi
+  $ nvidia-smi
 
-2. check that the nvidia addon for docker is installed 
+2. Check that the nvidia addon for docker is installed 
 
 [docker-nvidia(for GPU acceleration on Nvidia GPU hosts)](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
 
-3. uncomment the following line from .devcontainer/devcontainer.json
+3. Uncomment the following line from .devcontainer/devcontainer.json
 
 		//"--gpus" "all", // for nvidia gpu support
 
@@ -136,29 +136,29 @@ instead of
 and the following section also from .devcontainer/Dockerfile
 
 
-RUN apt-get update \
-  && apt-get install -y -qq --no-install-recommends \
-   libglvnd0 \
-   libgl1 \
-   libglx0 \
-   libegl1 \
-   libxext6 \
-   libx11-6 \
- && rm -rf /var/lib/apt/lists/*
+  RUN apt-get update \
+    && apt-get install -y -qq --no-install-recommends \
+    libglvnd0 \
+    libgl1 \
+    libglx0 \
+    libegl1 \
+    libxext6 \
+    libx11-6 \
+  && rm -rf /var/lib/apt/lists/*
 
-ENV NVIDIA_VISIBLE_DEVICES all
-ENV NVIDIA_DRIVER_CAPABILITIES graphics,utility,compute
+  ENV NVIDIA_VISIBLE_DEVICES all
+  ENV NVIDIA_DRIVER_CAPABILITIES graphics,utility,compute
 
 
 4. Build the container 
 
-5. check that everything works
+5. Check that everything works
 
-$ nvidia-smi
+  $ nvidia-smi
 
-$ sudo apt-get update \
-  && sudo apt-get install -y -qq glmark2 \
-  && glmark2
+  $ sudo apt-get update \
+    && sudo apt-get install -y -qq glmark2 \
+    && glmark2
 
 
 #### some error handling: 
