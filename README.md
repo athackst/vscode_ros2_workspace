@@ -39,6 +39,8 @@ To remove a linter just delete it's name from this line:
 ### Prerequisites
 
 You should already have Docker and VSCode with the remote containers plugin installed on your system.
+To make nvidia driver and opengl available in docker, follow the installation instructions for docker-nvidia. 
+They include the steps in docker and add the additional gpu layer. 
 
 * [docker](https://docs.docker.com/engine/install/)
 * [docker-nvidia(for GPU acceleration on Nvidia GPU hosts)](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
@@ -117,28 +119,44 @@ $ nvidia-smi
 
 [docker-nvidia(for GPU acceleration on Nvidia GPU hosts)](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
 
-3. uncomment the following 3 lines from .devcontainer/devcontainer.json
+3. uncomment the following line from .devcontainer/devcontainer.json
 
-		"--volume=/tmp/.X11-unix:/tmp/.X11-unix"//, <note the //,>
-		//"--gpus" "all",
-		//"--rm"
+		//"--gpus" "all", // for nvidia gpu support
 
-and the following section also from .devcontainer/devcontainer.json
+and use this line 
 
-5. Connecting to the Host’s X Server
+	"containerEnv": { "DISPLAY": "${localEnv:DISPLAY}" , 
+				"QT_X11_NO_MITSHM": "1"},
 
-There are plenty of articles on the intertubes about exposing X and connecting to the host’s X server from a container. The Open Source Robotics Foundation, for example, covers the topic extensively, here. But in a nutshell, to allow connections to X, run on the host os:
+instead of 
 
-      $ xhost +local:root
-
-The connection can be made container-specific (see [ROS wiki](https://wiki.ros.org/docker/Tutorials/GUI))
-
-and restart the session (logoff login) or restart ubuntu 
+	"containerEnv": { "DISPLAY": "${localEnv:DISPLAY}"}
 
 
-6. check that everything works
+and the following section also from .devcontainer/Dockerfile
 
-sudo apt-get update \
+
+RUN apt-get update \
+  && apt-get install -y -qq --no-install-recommends \
+   libglvnd0 \
+   libgl1 \
+   libglx0 \
+   libegl1 \
+   libxext6 \
+   libx11-6 \
+ && rm -rf /var/lib/apt/lists/*
+
+ENV NVIDIA_VISIBLE_DEVICES all
+ENV NVIDIA_DRIVER_CAPABILITIES graphics,utility,compute
+
+
+4. Build the container 
+
+5. check that everything works
+
+$ nvidia-smi
+
+$ sudo apt-get update \
   && sudo apt-get install -y -qq glmark2 \
   && glmark2
 
