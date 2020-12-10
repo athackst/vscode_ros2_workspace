@@ -126,39 +126,39 @@ results in:
 and use this line 
 
 	"containerEnv": { "DISPLAY": "${localEnv:DISPLAY}" , 
-				"QT_X11_NO_MITSHM": "1"},
+			`"QT_X11_NO_MITSHM": "1"},
 
 instead of 
 
-	"containerEnv": { "DISPLAY": "${localEnv:DISPLAY}"}
+	`"containerEnv": { "DISPLAY": "${localEnv:DISPLAY}"}`
 
 
 and the following section also from .devcontainer/Dockerfile
 
 
-  RUN apt-get update \
-    && apt-get install -y -qq --no-install-recommends \
-    libglvnd0 \
-    libgl1 \
-    libglx0 \
-    libegl1 \
-    libxext6 \
-    libx11-6 \
-  && rm -rf /var/lib/apt/lists/*
+  `RUN apt-get update \`
+    `&& apt-get install -y -qq --no-install-recommends \`
+    `libglvnd0 \`
+    `libgl1 \`
+    `libglx0 \`
+    `libegl1 \`
+    `libxext6 \`
+    `libx11-6 \`
+  `&& rm -rf /var/lib/apt/lists/*`
 
-  ENV NVIDIA_VISIBLE_DEVICES all
-  ENV NVIDIA_DRIVER_CAPABILITIES graphics,utility,compute
+  `ENV NVIDIA_VISIBLE_DEVICES all`
+  `ENV NVIDIA_DRIVER_CAPABILITIES graphics,utility,compute`
 
 
 4. Build the container 
 
 5. Check that everything works
 
-  $ nvidia-smi
+  `$ nvidia-smi`
 
-  $ sudo apt-get update \
-    && sudo apt-get install -y -qq glmark2 \
-    && glmark2
+  `$ sudo apt-get update \`
+    `&& sudo apt-get install -y -qq glmark2 \`
+    `&& glmark2`
 
 
 #### some error handling: 
