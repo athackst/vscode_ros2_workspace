@@ -41,6 +41,7 @@ To remove a linter just delete it's name from this line:
 You should already have Docker and VSCode with the remote containers plugin installed on your system.
 
 * [docker](https://docs.docker.com/engine/install/)
+* [docker-nvidia(for GPU acceleration on Nvidia GPU hosts)](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
 * [vscode](https://code.visualstudio.com/)
 * [vscode remote containers plugin](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 
@@ -89,3 +90,65 @@ VSCode will build the dockerfile inside of `.devcontainer` for you.  If you open
    1. If you are using a `ros2.repos` file, import the contents `Terminal->Run Task..->import from workspace file`
 2. Install dependencies `Terminal->Run Task..->install dependencies`
 3. Develop!
+
+
+### enable GPU acceleration
+
+Error messages that show lacking GPU acceleration (in docker terminal) 
+
+  $ sudo apt-get update   && sudo apt-get install -y -qq glmark2   && glmark2
+results in: 
+
+
+   libGL error: No matching fbConfigs or visuals found
+   libGL error: failed to load driver: swrast
+      X Error of failed request:  GLXBadContext
+   Major opcode of failed request:  151 (GLX)
+   Minor opcode of failed request:  6 (X_GLXIsDirect)
+   Serial number of failed request:  48
+   Current serial number in output stream:  47
+
+
+1. check that nvidia drivers are current on the host with 
+
+$ nvidia-smi
+
+2. check that the nvidia addon for docker is installed 
+
+[docker-nvidia(for GPU acceleration on Nvidia GPU hosts)](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
+
+3. uncomment the following 3 lines from .devcontainer/devcontainer.json
+
+		"--volume=/tmp/.X11-unix:/tmp/.X11-unix"//, <note the //,>
+		//"--gpus" "all",
+		//"--rm"
+
+and the following section also from .devcontainer/devcontainer.json
+
+5. Connecting to the Host’s X Server
+
+There are plenty of articles on the intertubes about exposing X and connecting to the host’s X server from a container. The Open Source Robotics Foundation, for example, covers the topic extensively, here. But in a nutshell, to allow connections to X, run on the host os:
+
+      $ xhost +local:root
+
+The connection can be made container-specific (see [ROS wiki](https://wiki.ros.org/docker/Tutorials/GUI))
+
+and restart the session (logoff login) or restart ubuntu 
+
+
+6. check that everything works
+
+sudo apt-get update \
+  && sudo apt-get install -y -qq glmark2 \
+  && glmark2
+
+
+#### some error handling: 
+
+The dockerfile can be built but using devcontainer.json results in error messages like "docker container cannot connect to device [[gpu]]" means docker itself is installed, but not [docker-nvidia(for GPU acceleration on Nvidia GPU hosts)](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
+
+#### more information
+
+https://wiki.ros.org/docker/Tutorials/GUI
+https://medium.com/@benjamin.botto/opengl-and-cuda-applications-in-docker-af0eece000f1
+https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker
