@@ -156,9 +156,7 @@ and the following section also from .devcontainer/Dockerfile
 
   `$ nvidia-smi`
 
-  `$ sudo apt-get update \`
-    `&& sudo apt-get install -y -qq glmark2 \`
-    `&& glmark2`
+  $ sudo apt-get update && sudo apt-get install -y -qq glmark2 && glmark2
 
 
 #### some error handling: 
