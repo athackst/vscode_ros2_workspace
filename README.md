@@ -100,7 +100,8 @@ VSCode will build the dockerfile inside of `.devcontainer` for you.  If you open
 
 #### Docker image cannot be built: 
 
-The dockerfile can be built but using devcontainer.json results in error messages like "docker container cannot connect to device [[gpu]]" means docker itself is installed, but not the above mentioned nvidia part
+The dockerfile can be built but using devcontainer.json results in error messages like "docker container cannot connect to device [[gpu]]" means docker itself is installed, but not the above mentioned nvidia part. 
+Solution is, to follow the guide and the test with nvidia-smi as indicated here: 
 [docker-nvidia(for GPU acceleration on Nvidia GPU hosts)](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
 
 
@@ -123,56 +124,8 @@ results in:
    Current serial number in output stream:  47
 ```
 
-1. Check that nvidia drivers are working on the host with executing the following on the host 
-
-```
-  $ nvidia-smi
-```
-
-2. Check that the nvidia addon for docker is installed 
-
+Solution is, to follow the guide and the test with nvidia-smi as indicated here: 
 [docker-nvidia(for GPU acceleration on Nvidia GPU hosts)](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
-
-3. Uncomment the following line from .devcontainer/devcontainer.json
-
-```
-		//"--gpus" "all", // for nvidia gpu support
-```
-
-and use this line 
-```
-	"containerEnv": { "DISPLAY": "${localEnv:DISPLAY}" , 
-			`"QT_X11_NO_MITSHM": "1"},
-```
-
-instead of 
-```
-	"containerEnv": { "DISPLAY": "${localEnv:DISPLAY}"}
-```
-
-and the following section also from .devcontainer/Dockerfile
-
-```
-  RUN apt-get update \
-    && apt-get install -y -qq --no-install-recommends \
-    libglvnd0 \
-    libgl1 \
-    libglx0 \
-    libegl1 \
-    libxext6 \
-    libx11-6 \
-
-  ENV NVIDIA_VISIBLE_DEVICES all
-  ENV NVIDIA_DRIVER_CAPABILITIES graphics,utility,compute
-```
-
-4. Rebuild the container 
-
-5. Check that everything works
-```
-  $ nvidia-smi
-  $ sudo apt-get update && sudo apt-get install -y -qq glmark2 && glmark2
-```
 
 
 #### more information
