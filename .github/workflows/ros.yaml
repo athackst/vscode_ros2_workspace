@@ -1,48 +1,46 @@
 name: ROS
 
 on:
-  push:
-    branches: [foxy]
+  pull_request:
   workflow_dispatch:
     
 jobs:
   test:
     runs-on: ubuntu-latest
-    container: athackst/ros2:foxy-dev
     steps:
-      - uses: actions/checkout@v2
-      - name: "Get workspace"
+      - 
+        name: Checkout code
+        uses: actions/checkout@v2
+      -
+        name: Test
         run: |
-          if [ -f src/ros2.repos ]; then
-            vcs import --skip-existing < src/ros2.repos src
-          fi
-      - name: "Get dependencies"
-        run: |
-          sudo apt-get update
-          rosdep update
-          rosdep install --from-paths src --ignore-src -y --rosdistro=foxy
-      - name: "Build"
-        run: |
-          colcon build --cmake-args '-DCMAKE_BUILD_TYPE=RelWithDebInfo' -Wall -Wextra -Wpedantic
-        continue-on-error: true
-      - name: "Test"
-        run: |
-          colcon test
+          docker build -t $GITHUB_REPOSITORY -f ./.devcontainer/Dockerfile .
+          docker run -v $GITHUB_WORKSPACE:$GITHUB_WORKSPACE -w $GITHUB_WORKSPACE $GITHUB_REPOSITORY \
+          bash -c "
+          vcs import --skip-existing < src/ros2.repos src \
+          && apt-get update \
+          && rosdep update \
+          && rosdep install --from-paths src -y \
+          && colcon build --cmake-args '-DCMAKE_BUILD_TYPE=Release' -Wall -Wextra -Wpedantic \
+          && colcon test \
+          "
   lint:
     name: ament_${{ matrix.linter }}
     runs-on: ubuntu-latest
-    container: athackst/ros2:foxy-dev
     strategy:
       fail-fast: false
       matrix:
           linter: [cppcheck, cpplint, uncrustify, lint_cmake, xmllint, flake8, pep257]
     steps:
-      - uses: actions/checkout@v2
-      - name: "Get workspace"
+      - 
+        name: Checkout code
+        uses: actions/checkout@v2
+      -
+        name: Run linter
         run: |
-          if [ -f src/ros2.repos ]; then
-            vcs import --skip-existing < src/ros2.repos src
-          fi
-      - name: "run linter"
-        run: |
-          ament_${{ matrix.linter }} src/
+          docker build -t $GITHUB_REPOSITORY -f ./.devcontainer/Dockerfile .
+          docker run -v $GITHUB_WORKSPACE:$GITHUB_WORKSPACE -w $GITHUB_WORKSPACE $GITHUB_REPOSITORY \
+          bash -c "
+          vcs import --skip-existing < src/ros2.repos src \
+          && ament_${{ matrix.linter }} src/
+          "
