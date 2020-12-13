@@ -14,7 +14,6 @@
 		"--security-opt=apparmor:unconfined",
 		"--volume=/tmp/.X11-unix:/tmp/.X11-unix",
 		"--gpus" "all",
-		"--rm"
 	],
 	// default
 	//"containerEnv": { "DISPLAY": "${localEnv:DISPLAY}"}

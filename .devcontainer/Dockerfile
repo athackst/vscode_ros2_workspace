@@ -28,8 +28,7 @@ RUN apt-get update \
   libglx0 \
   libegl1 \
   libxext6 \
-  libx11-6 \
-&& rm -rf /var/lib/apt/lists/*
+  libx11-6
 
 # Env vars for the nvidia-container-runtime.
 ENV NVIDIA_VISIBLE_DEVICES all

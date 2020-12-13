@@ -3,11 +3,6 @@
 ############ 
 # Example:
 ############
-repositories:
-  ros2-lgsvl-bridge:
-    type: git
-    url: https://github.com/lgsvl/ros2-lgsvl-bridge
-    version: foxy-devel
   examples:
     type: git
     url: https://github.com/ros2/examples.git

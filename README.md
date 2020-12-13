@@ -43,7 +43,7 @@ To make nvidia driver and opengl available in docker, follow the installation in
 They include the steps in docker and add the additional gpu layer. 
 
 * [docker](https://docs.docker.com/engine/install/)
-* [docker-nvidia(for GPU acceleration on Nvidia GPU hosts)](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
+* [docker-nvidia (includes docker install and additional installation for NVidia GPU accelerated hosts)](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
 * [vscode](https://code.visualstudio.com/)
 * [vscode remote containers plugin](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 
@@ -94,14 +94,26 @@ VSCode will build the dockerfile inside of `.devcontainer` for you.  If you open
 3. Develop!
 
 
-### Enable GPU acceleration
+
+## Error handling for GPU acceleration
+
+
+#### Docker image cannot be built: 
+
+The dockerfile can be built but using devcontainer.json results in error messages like "docker container cannot connect to device [[gpu]]" means docker itself is installed, but not the above mentioned nvidia part
+[docker-nvidia(for GPU acceleration on Nvidia GPU hosts)](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
+
+
+### Programs in Docker cannot access GPU
 
 Error messages that show lacking GPU acceleration (in docker terminal) 
-
+```
   $ sudo apt-get update   && sudo apt-get install -y -qq glmark2   && glmark2
+```
+
 results in: 
 
-
+```
    libGL error: No matching fbConfigs or visuals found
    libGL error: failed to load driver: swrast
       X Error of failed request:  GLXBadContext
@@ -109,11 +121,13 @@ results in:
    Minor opcode of failed request:  6 (X_GLXIsDirect)
    Serial number of failed request:  48
    Current serial number in output stream:  47
+```
 
+1. Check that nvidia drivers are working on the host with executing the following on the host 
 
-1. Check that nvidia drivers are current on the host with 
-
+```
   $ nvidia-smi
+```
 
 2. Check that the nvidia addon for docker is installed 
 
@@ -121,47 +135,45 @@ results in:
 
 3. Uncomment the following line from .devcontainer/devcontainer.json
 
+```
 		//"--gpus" "all", // for nvidia gpu support
+```
 
 and use this line 
-
+```
 	"containerEnv": { "DISPLAY": "${localEnv:DISPLAY}" , 
 			`"QT_X11_NO_MITSHM": "1"},
+```
 
 instead of 
-
-	`"containerEnv": { "DISPLAY": "${localEnv:DISPLAY}"}`
-
+```
+	"containerEnv": { "DISPLAY": "${localEnv:DISPLAY}"}
+```
 
 and the following section also from .devcontainer/Dockerfile
 
+```
+  RUN apt-get update \
+    && apt-get install -y -qq --no-install-recommends \
+    libglvnd0 \
+    libgl1 \
+    libglx0 \
+    libegl1 \
+    libxext6 \
+    libx11-6 \
 
-  `RUN apt-get update \`
-    `&& apt-get install -y -qq --no-install-recommends \`
-    `libglvnd0 \`
-    `libgl1 \`
-    `libglx0 \`
-    `libegl1 \`
-    `libxext6 \`
-    `libx11-6 \`
-  `&& rm -rf /var/lib/apt/lists/*`
+  ENV NVIDIA_VISIBLE_DEVICES all
+  ENV NVIDIA_DRIVER_CAPABILITIES graphics,utility,compute
+```
 
-  `ENV NVIDIA_VISIBLE_DEVICES all`
-  `ENV NVIDIA_DRIVER_CAPABILITIES graphics,utility,compute`
-
-
-4. Build the container 
+4. Rebuild the container 
 
 5. Check that everything works
-
-  `$ nvidia-smi`
-
+```
+  $ nvidia-smi
   $ sudo apt-get update && sudo apt-get install -y -qq glmark2 && glmark2
+```
 
-
-#### some error handling: 
-
-The dockerfile can be built but using devcontainer.json results in error messages like "docker container cannot connect to device [[gpu]]" means docker itself is installed, but not [docker-nvidia(for GPU acceleration on Nvidia GPU hosts)](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
 
 #### more information
 
