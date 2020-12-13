@@ -101,8 +101,9 @@ VSCode will build the dockerfile inside of `.devcontainer` for you.  If you open
 #### Docker image cannot be built: 
 
 The dockerfile can be built but using devcontainer.json results in error messages like "docker container cannot connect to device [[gpu]]" means docker itself is installed, but not the above mentioned nvidia part. 
+
 Solution is, to follow the guide and the test with nvidia-smi as indicated here: 
-[docker-nvidia(for GPU acceleration on Nvidia GPU hosts)](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
+- [docker-nvidia(for GPU acceleration on Nvidia GPU hosts)](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
 
 
 ### Programs in Docker cannot access GPU
@@ -111,9 +112,7 @@ Error messages that show lacking GPU acceleration (in docker terminal)
 ```
   $ sudo apt-get update   && sudo apt-get install -y -qq glmark2   && glmark2
 ```
-
 results in: 
-
 ```
    libGL error: No matching fbConfigs or visuals found
    libGL error: failed to load driver: swrast
@@ -130,6 +129,6 @@ Solution is, to follow the guide and the test with nvidia-smi as indicated here:
 
 #### more information
 
-https://wiki.ros.org/docker/Tutorials/GUI
-https://medium.com/@benjamin.botto/opengl-and-cuda-applications-in-docker-af0eece000f1
-https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker
+- https://wiki.ros.org/docker/Tutorials/GUI
+- https://medium.com/@benjamin.botto/opengl-and-cuda-applications-in-docker-af0eece000f1
+- https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker
