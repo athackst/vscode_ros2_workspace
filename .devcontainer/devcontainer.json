@@ -15,11 +15,8 @@
 		"--volume=/tmp/.X11-unix:/tmp/.X11-unix",
 		"--gpus" "all",
 	],
-	// default
-	//"containerEnv": { "DISPLAY": "${localEnv:DISPLAY}"}
-	// enable instead the two lines below for nvidia driver + qt apps 
-	"containerEnv": { "DISPLAY": "${localEnv:DISPLAY}" , 
-				"QT_X11_NO_MITSHM": "1"},
+	"containerEnv": { "DISPLAY": "${localEnv:DISPLAY}"}
+
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
 		"terminal.integrated.shell.linux": "/bin/bash"
