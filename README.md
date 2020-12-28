@@ -39,8 +39,11 @@ To remove a linter just delete it's name from this line:
 ### Prerequisites
 
 You should already have Docker and VSCode with the remote containers plugin installed on your system.
+To make nvidia driver and opengl available in docker, follow the installation instructions for docker-nvidia. 
+They include the steps in docker and add the additional gpu layer. 
 
 * [docker](https://docs.docker.com/engine/install/)
+* [docker-nvidia (includes docker install and additional installation for NVidia GPU accelerated hosts)](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
 * [vscode](https://code.visualstudio.com/)
 * [vscode remote containers plugin](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 
@@ -89,3 +92,43 @@ VSCode will build the dockerfile inside of `.devcontainer` for you.  If you open
    1. If you are using a `ros2.repos` file, import the contents `Terminal->Run Task..->import from workspace file`
 2. Install dependencies `Terminal->Run Task..->install dependencies`
 3. Develop!
+
+
+
+## Error handling for GPU acceleration
+
+
+#### Docker image cannot be built: 
+
+The dockerfile can be built but using devcontainer.json results in error messages like "docker container cannot connect to device [[gpu]]" means docker itself is installed, but not the above mentioned nvidia part. 
+
+Solution is, to follow the guide and the test with nvidia-smi as indicated here: 
+- [docker-nvidia(for GPU acceleration on Nvidia GPU hosts)](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
+
+
+### Programs in Docker cannot access GPU
+
+Error messages that show lacking GPU acceleration (in docker terminal) 
+```
+  $ sudo apt-get update   && sudo apt-get install -y -qq glmark2   && glmark2
+```
+results in: 
+```
+   libGL error: No matching fbConfigs or visuals found
+   libGL error: failed to load driver: swrast
+      X Error of failed request:  GLXBadContext
+   Major opcode of failed request:  151 (GLX)
+   Minor opcode of failed request:  6 (X_GLXIsDirect)
+   Serial number of failed request:  48
+   Current serial number in output stream:  47
+```
+
+Solution is, to follow the guide and the test with nvidia-smi as indicated here: 
+[docker-nvidia(for GPU acceleration on Nvidia GPU hosts)](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
+
+
+#### more information
+
+- https://wiki.ros.org/docker/Tutorials/GUI
+- https://medium.com/@benjamin.botto/opengl-and-cuda-applications-in-docker-af0eece000f1
+- https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker
