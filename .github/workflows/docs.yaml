@@ -1,0 +1,19 @@
+name: docs
+
+on:
+  push:
+    branches:
+      - "dashing"
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build and push docs
+        uses: athackst/mkdocs-simple-plugin@v0.8.1
+        with: 
+          publish_branch: gh-pages-dashing
+          edit_uri: edit/dashing/

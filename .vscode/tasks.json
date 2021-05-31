@@ -15,6 +15,14 @@
             },
             "problemMatcher": "$gcc"
         },
+        {
+            "label": "debug",
+            "detail": "Build workspace (debug)",
+            "type": "shell",
+            "command": "colcon build --symlink-install --cmake-args '-DCMAKE_BUILD_TYPE=Debug' -Wall -Wextra -Wpedantic",
+            "group": "build",
+            "problemMatcher": "$gcc"
+        },
         // Test tasks
         {
             "label": "test",
