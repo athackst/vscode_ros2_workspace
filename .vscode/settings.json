@@ -3,7 +3,7 @@
     "editor.rulers": [
         100
     ],
-    "editor.defaultFormatter": "LaurentTreguier.uncrustify",
+    "editor.defaultFormatter": "zachflower.uncrustify",
     "files.associations": {
         "*.repos": "yaml",
         "*.world": "xml",
@@ -25,9 +25,10 @@
     "uncrustify.useReplaceOption": true,
     "uncrustify.configPath.linux": "/opt/ros/foxy/lib/python3.8/site-packages/ament_uncrustify/configuration/ament_code_style.cfg",
     "[cpp]": {
-        "editor.defaultFormatter": "LaurentTreguier.uncrustify"
+        "editor.defaultFormatter": "zachflower.uncrustify"
     },
     "cSpell.words": [
+        "RTPS",
         "athackst",
         "autopep",
         "cmake",
@@ -41,6 +42,7 @@
         "rclcpp",
         "rclpy",
         "repos",
+        "rosdistro",
         "rosidl",
         "uncrustify",
         "xmllint"
@@ -52,5 +54,18 @@
         "**/build": true,
         "**/install": true,
         "**/log": true
-    }
+    },
+    "python.analysis.extraPaths": [
+        "/opt/ros/foxy/lib/python3.8/site-packages/"
+    ],
+    "cSpell.allowCompoundWords": true,
+    "cSpell.ignorePaths": [
+        "**/package-lock.json",
+        "**/node_modules/**",
+        "**/vscode-extension/**",
+        "**/.git/objects/**",
+        ".vscode",
+        ".vscode-insiders",
+        ".devcontainer/devcontainer.json"
+    ]
 }

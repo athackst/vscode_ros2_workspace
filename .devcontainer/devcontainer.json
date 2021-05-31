@@ -21,7 +21,7 @@
 	},
 	"extensions": [
 		"dotjoshjohnson.xml",
-		"laurenttreguier.uncrustify",
+		"zachflower.uncrustify",
 		"ms-azuretools.vscode-docker",
 		"ms-iot.vscode-ros",
 		"ms-python.python",
