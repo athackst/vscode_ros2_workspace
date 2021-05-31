@@ -20,7 +20,7 @@ jobs:
           vcs import --skip-existing < src/ros2.repos src \
           && apt-get update \
           && rosdep update \
-          && rosdep install --from-paths src -y \
+          && rosdep install --from-paths src --ignore-src -y --rosdistro=foxy \
           && colcon build --cmake-args '-DCMAKE_BUILD_TYPE=Release' -Wall -Wextra -Wpedantic \
           && colcon test \
           "
