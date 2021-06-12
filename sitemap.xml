@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
-     <loc>https://athackst.github.io/vscode_ros2_workspace/</loc>
-     <lastmod>2021-05-31</lastmod>
-     <changefreq>daily</changefreq>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://athackst.github.io/vscode_ros2_workspace/</loc>
+         <lastmod>2021-06-12</lastmod>
+         <changefreq>daily</changefreq>
     </url>
 </urlset>
