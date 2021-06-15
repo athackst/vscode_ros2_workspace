@@ -17,11 +17,16 @@
 	"containerEnv": { "DISPLAY": "${localEnv:DISPLAY}" },
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
-		"terminal.integrated.shell.linux": "/bin/bash"
+		"terminal.integrated.profiles.linux": {
+			"bash": {
+				"path": "bash"
+			},
+		},
+		"terminal.integrated.defaultProfile.linux": "bash"
 	},
 	"extensions": [
 		"dotjoshjohnson.xml",
-		"laurenttreguier.uncrustify",
+		"zachflower.uncrustify",
 		"ms-azuretools.vscode-docker",
 		"ms-iot.vscode-ros",
 		"ms-python.python",

@@ -1,4 +1,4 @@
-# VSCode ROS2 Workspace Template
+# VSCode ROS2 Workspace Template (EOL)
 
 This template will get you set up using ROS2 with VSCode as your IDE.
 
