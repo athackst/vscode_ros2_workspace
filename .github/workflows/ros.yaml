@@ -2,6 +2,9 @@ name: ROS
 
 on:
   pull_request:
+  push:
+    branches:
+      - "dashing"
   workflow_dispatch:
     
 jobs:
@@ -19,7 +22,7 @@ jobs:
           bash -c "
           vcs import --skip-existing < src/ros2.repos src \
           && apt-get update \
-          && rosdep update \
+          && rosdep update --include-eol-distros \
           && rosdep install --from-paths src --ignore-src -y --rosdistro=dashing \
           && colcon build --cmake-args '-DCMAKE_BUILD_TYPE=Release' -Wall -Wextra -Wpedantic \
           && colcon test \

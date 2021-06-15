@@ -56,7 +56,7 @@
         "**/log": true
     },
     "python.analysis.extraPaths": [
-        "/opt/ros/foxy/lib/python3.6/site-packages/"
+        "/opt/ros/dashing/lib/python3.6/site-packages/"
     ],
     "cSpell.allowCompoundWords": true,
     "cSpell.ignorePaths": [
