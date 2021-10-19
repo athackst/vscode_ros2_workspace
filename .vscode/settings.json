@@ -67,5 +67,6 @@
         ".vscode",
         ".vscode-insiders",
         ".devcontainer/devcontainer.json"
-    ]
+    ],
+    "colcon.installtype": "symlink-install"
 }
