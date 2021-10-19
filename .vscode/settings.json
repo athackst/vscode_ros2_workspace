@@ -3,12 +3,14 @@
     "editor.rulers": [
         100
     ],
-    "editor.defaultFormatter": "zachflower.uncrustify",
     "files.associations": {
         "*.repos": "yaml",
         "*.world": "xml",
         "*.xacro": "xml"
     },
+    "python.analysis.extraPaths": [
+        "/opt/ros/foxy/lib/python3.8/site-packages/"
+    ],
     // Autocomplete from ros python packages
     "python.autoComplete.extraPaths": [
         "/opt/ros/foxy/lib/python3.8/site-packages/"
@@ -22,31 +24,10 @@
     ],
     "C_Cpp.default.intelliSenseMode": "clang-x64",
     "C_Cpp.formatting": "Disabled",
-    "uncrustify.useReplaceOption": true,
     "uncrustify.configPath.linux": "/opt/ros/foxy/lib/python3.8/site-packages/ament_uncrustify/configuration/ament_code_style.cfg",
     "[cpp]": {
         "editor.defaultFormatter": "zachflower.uncrustify"
     },
-    "cSpell.words": [
-        "RTPS",
-        "athackst",
-        "autopep",
-        "cmake",
-        "cppcheck",
-        "cpplint",
-        "deque",
-        "devcontainer",
-        "ints",
-        "noqa",
-        "pytest",
-        "rclcpp",
-        "rclpy",
-        "repos",
-        "rosdistro",
-        "rosidl",
-        "uncrustify",
-        "xmllint"
-    ],
     "search.exclude": {
         "**/node_modules": true,
         "**/bower_components": true,
@@ -55,8 +36,29 @@
         "**/install": true,
         "**/log": true
     },
-    "python.analysis.extraPaths": [
-        "/opt/ros/foxy/lib/python3.8/site-packages/"
+    "cSpell.words": [
+        "athackst",
+        "autopep",
+        "cmake",
+        "cppcheck",
+        "cpplint",
+        "DCMAKE",
+        "deque",
+        "devcontainer",
+        "ints",
+        "noqa",
+        "pytest",
+        "rclcpp",
+        "rclpy",
+        "repos",
+        "rosdep",
+        "rosdistro",
+        "rosidl",
+        "RTPS",
+        "uncrustify",
+        "Wextra",
+        "Wpedantic",
+        "xmllint"
     ],
     "cSpell.allowCompoundWords": true,
     "cSpell.ignorePaths": [
