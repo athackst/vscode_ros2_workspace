@@ -15,7 +15,7 @@
 		"--volume=/tmp/.X11-unix:/tmp/.X11-unix",
 		"--gpus" "all",
 	],
-	"containerEnv": { "DISPLAY": "${localEnv:DISPLAY}"}
+	"containerEnv": { "DISPLAY": "${localEnv:DISPLAY}"},
 
 	// Set *default* container specific settings.json values on container create.
 	"settings": {
