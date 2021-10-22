@@ -17,7 +17,7 @@
       "name": "(gdb) Launch",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/install/${input:package}/lib/${input:package}/${input:program}",
+      "program": "${workspaceFolder}/install/lib/${input:package}/${input:program}",
       "args": [],
       "preLaunchTask": "build",
       "stopAtEntry": true,
@@ -38,13 +38,13 @@
       "id": "package",
       "type": "promptString",
       "description": "Package name",
-      // "default": "examples_rclcpp_minimal_publisher"
+      "default": "examples_rclcpp_minimal_publisher"
     },
     {
       "id": "program",
       "type": "promptString",
       "description": "Program name",
-      // "default": "publisher_member_function"
+      "default": "publisher_member_function"
     }
   ]
 }
