@@ -7,12 +7,14 @@ RUN apt-get update \
    && apt-get -y install --no-install-recommends \
    bash-completion \
    cmake \
+   curl \
    gdb \
    pylint3 \
    python-autopep8 \
    python3-argcomplete \
    python3-pip \
    vim \
+   wget \
    #
    # Clean up
    && apt-get autoremove -y \

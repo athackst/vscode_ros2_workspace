@@ -1,6 +1,6 @@
 # Adding all the necessary ros sourcing
 echo "" >> ~/.bashrc
 echo "## ROS" >> ~/.bashrc
-echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc
-echo "source /home/ros/ros_ws/install/setup.bash" >> ~/.bashrc
-echo "export ROS_DOMAIN_ID=21" >> ~/.bashrc
+echo "source /workspaces/sailbot_ros2_workspace/install/setup.bash" >> ~/.bashrc
+echo "source /usr/share/colcon_cd/function/colcon_cd.sh" >> ~/.bashrc
+echo "export _colcon_cd_root=/workspaces/sailbot_ros2_workspace" >> ~/.bashrc

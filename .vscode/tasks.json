@@ -5,7 +5,7 @@
     "tasks": [
         // Build tasks
         {
-            "label": "build",
+            "label": "Build",
             "detail": "Build workspace (default)",
             "type": "shell",
             "command": "colcon build --merge-install --symlink-install --cmake-args '-DCMAKE_BUILD_TYPE=RelWithDebInfo' '-DCMAKE_EXPORT_COMPILE_COMMANDS=On' -Wall -Wextra -Wpedantic",
@@ -16,19 +16,19 @@
             "problemMatcher": "$gcc"
         },
         {
-            "label": "debug",
+            "label": "Debug",
             "detail": "Build workspace (debug)",
             "type": "shell",
-            "command": "colcon build --merge-install --symlink-install  --cmake-args '-DCMAKE_BUILD_TYPE=Debug' -Wall -Wextra -Wpedantic",
+            "command": "colcon build --merge-install --symlink-install --cmake-args '-DCMAKE_BUILD_TYPE=Debug' -Wall -Wextra -Wpedantic",
             "group": "build",
             "problemMatcher": "$gcc"
         },
         // Test tasks
         {
-            "label": "test",
+            "label": "Test",
             "detail": "Run all unit tests and show results.",
             "type": "shell",
-            "command": "colcon test --merge-install --symlink-install; colcon test-result",
+            "command": "colcon test --merge-install; colcon test-result",
             "group": {
                 "kind": "test",
                 "isDefault": true
@@ -36,14 +36,14 @@
         },
         // Clean
         {
-            "label": "clean",
+            "label": "Clean",
             "detail": "Run the clean target",
             "type": "shell",
-            "command": "colcon build --cmake-target clean",
+            "command": "colcon build --merge-install --symlink-install --cmake-target clean",
             "problemMatcher": "$gcc"
         },
         {
-            "label": "purge",
+            "label": "Purge",
             "detail": "Purge workspace by deleting all generated files.",
             "type": "shell",
             "command": "rm -fr build install log; py3clean .",
@@ -51,7 +51,7 @@
         },
         // Linting and static code analysis tasks
         {
-            "label": "fix",
+            "label": "Fix",
             "detail": "Reformat files with uncrustify.",
             "type": "shell",
             "command": "ament_uncrustify --reformat src/",
@@ -249,35 +249,35 @@
         },
         // Workspace editing tasks
         {
-            "label": "new ament_cmake package",
+            "label": "New ament_cmake package",
             "detail": "Create a new ROS cpp package from a template.",
             "type": "shell",
             "command": "ros2 pkg create --destination-directory src --build-type ament_cmake ${input:package}",
             "problemMatcher": []
         },
         {
-            "label": "new ament_python package",
+            "label": "New ament_python package",
             "detail": "Create a new ROS python package from a template.",
             "type": "shell",
             "command": "ros2 pkg create --destination-directory src --build-type ament_python ${input:package}",
             "problemMatcher": []
         },
         {
-            "label": "import from workspace file",
+            "label": "Import from workspace file",
             "detail": "Use vcs to import modules specified by a workspace/rosinstall file.",
             "type": "shell",
             "command": "vcs import < src/ros2.repos src",
             "problemMatcher": []
         },
         {
-            "label": "update workspace file",
+            "label": "Update workspace file",
             "detail": "Use vcs to update repositories in src to workspace file.",
             "type": "shell",
             "command": "vcs export src > src/ros2.repos",
             "problemMatcher": []
         },
         {
-            "label": "install dependencies",
+            "label": "Install dependencies",
             "detail": "Install all dependencies specified in the workspaces package.xml files.",
             "type": "shell",
             "command": "sudo apt-get update && rosdep update && rosdep install --from-paths src --ignore-src -y",

@@ -19,7 +19,8 @@
 	"settings": {
 		"terminal.integrated.profiles.linux": {
 			"bash": {
-				"path": "bash"
+				"path": "bash",
+				"icon": "terminal-bash"
 			},
 		},
 		"terminal.integrated.defaultProfile.linux": "bash"
@@ -35,6 +36,15 @@
 		"smilerobotics.urdf",
 		"streetsidesoftware.code-spell-checker",
 		"twxs.cmake",
-		"yzhang.markdown-all-in-one"
+		"yzhang.markdown-all-in-one",
+		"johnpapa.vscode-peacock",
+		"vscode-icons-team.vscode-icons",
+		"KevinRose.vsc-python-indent",
+		"ms-vsliveshare.vsliveshare",
+		"jeff-hykin.better-cpp-syntax"
+	],
+	"mounts": [
+		"source=sailbot-new-project-bashhistory,target=/home/ros/commandhistory,type=volume",
+		"source=sailbot-new-project-roslog,target=/home/ros/.ros/log,type=volume"
 	]
 }

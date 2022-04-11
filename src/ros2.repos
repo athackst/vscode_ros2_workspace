@@ -3,8 +3,8 @@
 ############ 
 # Example:
 ############
-repositories:
-  examples:
-    type: git
-    url: https://github.com/ros2/examples.git
-    version: eloquent
+# repositories:
+  # examples:
+  #   type: git
+  #   url: https://github.com/ros2/examples.git
+  #   version: eloquent

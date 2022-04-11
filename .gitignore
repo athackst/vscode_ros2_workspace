@@ -2,3 +2,10 @@ build/*
 install/*
 log/*
 site/*
+src/*
+!src/ros2.repos
+!src/cpp_pubsub
+!src/py_pubsub
+
+# Python generated files
+*.pyc

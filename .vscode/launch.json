@@ -4,22 +4,22 @@
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
-    // Example launch of a python file
+    // Launch Python file
     {
-      "name": "Python: Current File",
+      "name": "ROS: Launch Python",
       "type": "python",
       "request": "launch",
       "program": "${file}",
-      "console": "integratedTerminal",
+      "console": "integratedTerminal"
     },
-    // Example gdb launch of a ros executable
+    // Launch ROS executable using GDB
     {
-      "name": "(gdb) Launch",
+      "name": "ROS: Launch Cpp",
       "type": "cppdbg",
       "request": "launch",
       "program": "${workspaceFolder}/install/lib/${input:package}/${input:program}",
       "args": [],
-      "preLaunchTask": "build",
+      "preLaunchTask": "Build",
       "stopAtEntry": true,
       "cwd": "${workspaceFolder}",
       "externalConsole": false,
@@ -31,6 +31,12 @@
           "ignoreFailures": true
         }
       ]
+    },
+    // Only Cpp currently working
+    {
+      "name": "ROS: Attach",
+      "type": "ros",
+      "request": "attach"
     }
   ],
   "inputs": [
@@ -38,13 +44,13 @@
       "id": "package",
       "type": "promptString",
       "description": "Package name",
-      "default": "examples_rclcpp_minimal_publisher"
+      "default": "cpp_pubsub"
     },
     {
       "id": "program",
       "type": "promptString",
       "description": "Program name",
-      "default": "publisher_member_function"
+      "default": "talker"
     }
   ]
 }
