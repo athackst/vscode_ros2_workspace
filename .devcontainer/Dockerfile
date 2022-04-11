@@ -15,7 +15,6 @@ RUN apt-get update \
    python3-pip \
    vim \
    wget \
-   #
    # Clean up
    && apt-get autoremove -y \
    && apt-get clean -y \
@@ -44,12 +43,10 @@ ENV DEBIAN_FRONTEND=
 FROM athackst as dev
 # FROM althack/ros2:foxy-dev 
 
-# ** [Optional] Uncomment this section to install additional packages. **
-#
+# # ** [Optional] Uncomment this section to install additional packages. **
 # ENV DEBIAN_FRONTEND=noninteractive
 # RUN apt-get update \
-#    && apt-get -y install --no-install-recommends <your-package-list-here> \
-#    #
+#    && apt-get -y install --no-install-recommends \
 #    # Clean up
 #    && apt-get autoremove -y \
 #    && apt-get clean -y \
