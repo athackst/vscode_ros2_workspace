@@ -41,7 +41,8 @@
 		"vscode-icons-team.vscode-icons",
 		"KevinRose.vsc-python-indent",
 		"ms-vsliveshare.vsliveshare",
-		"jeff-hykin.better-cpp-syntax"
+		"jeff-hykin.better-cpp-syntax",
+		"njpwerner.autodocstring"
 	],
 	"mounts": [
 		"source=sailbot-new-project-bashhistory,target=/home/ros/commandhistory,type=volume",
