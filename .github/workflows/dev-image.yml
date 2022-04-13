@@ -34,6 +34,6 @@ jobs:
         with:
           context: "{{defaultContext}}:.devcontainer/dev"
           push: true
-          tags: ghcr.io/patrick-5546/sailbot_ros2_workspace/dev
-          cache-from: type=gha, scope=${{ github.workflow }}
-          cache-to: type=gha, scope=${{ github.workflow }}
+          tags: ghcr.io/patrick-5546/sailbot_ros2_workspace/dev:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
