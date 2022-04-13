@@ -39,6 +39,7 @@
     "cSpell.words": [
         "athackst",
         "autopep",
+        "buildx",
         "cmake",
         "cppcheck",
         "cpplint",
@@ -48,6 +49,7 @@
         "ints",
         "noqa",
         "pytest",
+        "raye",
         "rclcpp",
         "rclpy",
         "repos",
