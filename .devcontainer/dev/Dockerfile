@@ -1,6 +1,6 @@
 FROM ghcr.io/patrick-5546/sailbot_ros2_workspace/base:raye as builder
+
 # https://github.com/athackst/dockerfiles/blob/main/ros2/eloquent.Dockerfile
-# curl and wget?
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
   && apt-get -y install --no-install-recommends \
@@ -45,16 +45,6 @@ ENV USER ros
 USER ros
 ENV HOME /home/${USER}
 
-# ROS1 workspace setup
-WORKDIR /workspaces/catkin_ws
-RUN mkdir src
-RUN /bin/bash -c "source /opt/ros/${ROS1_DISTRO}/setup.bash; catkin_make"
-
-# ROS2 workspace setup
-WORKDIR /workspaces/sailbot_ros2_workspace
-RUN mkdir src
-RUN /bin/bash -c "source /opt/ros/${ROS_DISTRO}/setup.bash; colcon build --merge-install --symlink-install"
-
 # Persist ROS logs
 RUN mkdir -p ${HOME}/.ros/log \
     && chown -R ${USER} ${HOME}/.ros/log
@@ -65,7 +55,3 @@ RUN SNIPPET="export PROMPT_COMMAND='history -a' && export HISTFILE=${HOME}/comma
   && touch ${HOME}/commandhistory/.bash_history \
   && chown -R ${USER} ${HOME}/commandhistory \
   && echo $SNIPPET >> "/home/${USER}/.bashrc"
-
-# Source ros in bash setup
-COPY update_bashrc.sh /sbin/update_bashrc
-RUN sudo chmod +x /sbin/update_bashrc ; sudo chown ros /sbin/update_bashrc ; sync ; /bin/bash -c /sbin/update_bashrc ; sudo rm /sbin/update_bashrc
