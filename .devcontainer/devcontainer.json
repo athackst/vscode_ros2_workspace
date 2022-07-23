@@ -13,7 +13,7 @@
 		"--security-opt=seccomp:unconfined",
 		"--security-opt=apparmor:unconfined",
 		"--volume=/tmp/.X11-unix:/tmp/.X11-unix",
-		"--gpus" "all",
+		"--gpus=all"
 	],
 	"containerEnv": { 
 		"DISPLAY": "${localEnv:DISPLAY}",
@@ -24,7 +24,7 @@
 		"terminal.integrated.profiles.linux": {
 			"bash": {
 				"path": "bash"
-			},
+			}
 		},
 		"terminal.integrated.defaultProfile.linux": "bash"
 	},
