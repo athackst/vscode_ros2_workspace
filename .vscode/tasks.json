@@ -113,6 +113,11 @@
                 "reveal": "silent",
                 "clear": true
             },
+            "options": {
+                "env": {
+                    "AMENT_CPPCHECK_ALLOW_SLOW_VERSIONS": "1"
+                }
+            }
         },
         {
             "label": "lint_cmake",

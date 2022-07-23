@@ -21,8 +21,9 @@ jobs:
           vcs import --skip-existing < src/ros2.repos src \
           && apt-get update \
           && rosdep update \
-          && rosdep install --from-paths src --ignore-src -y --rosdistro=foxy \
+          && rosdep install --from-paths src --ignore-src -y --rosdistro=humble \
           && colcon build --cmake-args '-DCMAKE_BUILD_TYPE=Release' -Wall -Wextra -Wpedantic \
+          && source install/setup.bash \
           && colcon test \
           "
   lint:
