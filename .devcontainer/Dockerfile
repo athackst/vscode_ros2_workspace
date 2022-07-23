@@ -1,4 +1,4 @@
-FROM althack/ros2:foxy-dev 
+FROM althack/ros2:foxy-cuda-dev
 
 # ** [Optional] Uncomment this section to install additional packages. **
 #
