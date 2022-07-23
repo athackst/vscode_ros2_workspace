@@ -28,7 +28,7 @@
             "label": "test",
             "detail": "Run all unit tests and show results.",
             "type": "shell",
-            "command": "colcon test --merge-install --symlink-install; colcon test-result",
+            "command": "colcon test --merge-install; colcon test-result",
             "group": {
                 "kind": "test",
                 "isDefault": true
@@ -70,181 +70,121 @@
             "problemMatcher": [
                 {
                     "owner": "uncrustify",
-                    "source": " uncrustify",
+                    "source": "uncrustify",
                     "fileLocation": "relative",
                     "pattern": [
-                    /// just the file name message
+                        // just the file name message
                         {
                             "regexp": "^(.*)'(.*)':",
                             "kind": "file",
                             "file": 2,
                             "message": 1
-                        },
-                  ]
+                        }
+                    ]
                 }
             ]
         },
         {
             "label": "cpplint",
             "detail": "Lint files with cpplint.",
-            "type": "shell",
-            "command": "ament_cpplint src/",
+            "type": "ament",
+            "task": "cpplint",
+            "path": "src/",
+            "problemMatcher": [
+                "$ament_cpplint"
+            ],
             "presentation": {
                 "panel": "dedicated",
                 "reveal": "silent",
                 "clear": true
             },
-            "problemMatcher": [
-                {
-                    "owner": "cpplint",
-                    "source": " cpplint",
-                    "fileLocation": "absolute",
-                    "pattern": [
-                        {
-                            "regexp": "^(.+):(\\d+):\\s+(.+)\\[(.+)\\]$",
-                            "file": 1,
-                            "line": 2,
-                            "message": 3,
-                            "code": 4
-                        }
-                    ]
-                }
-            ]
         },
         {
             "label": "cppcheck",
             "detail": "Run static code checker cppcheck.",
-            "type": "shell",
-            "command": "ament_cppcheck src/",
+            "type": "ament",
+            "task": "cppcheck",
+            "path": "src/",
+            "problemMatcher": [
+                "$ament_cppcheck"
+            ],
             "presentation": {
                 "panel": "dedicated",
                 "reveal": "silent",
                 "clear": true
             },
-            "problemMatcher": [
-                {
-                    "owner": "cppcheck",
-                    "source": "cppcheck",
-                    "pattern": [
-                        {
-                            "regexp": "^\\[(.+):(\\d+)\\]:\\s+(.+)$",
-                            "file": 1,
-                            "line": 2,
-                            "message": 3
-                        }
-                    ]
-                }
-            ]
         },
         {
             "label": "lint_cmake",
             "detail": "Run lint on cmake files.",
-            "type": "shell",
-            "command": "ament_lint_cmake src/",
+            "type": "ament",
+            "task": "lint_cmake",
+            "path": "src/",
+            "problemMatcher": [
+                "$ament_lint_cmake"
+            ],
             "presentation": {
                 "panel": "dedicated",
                 "reveal": "silent",
                 "clear": true
-            },
-            "problemMatcher": [
-                {
-                    "owner": "lint_cmake",
-                    "source": "lint_cmake",
-                    "pattern": [
-                        {
-                            "regexp": "^(.+):(\\d+):\\s+(.+)$",
-                            "file": 1,
-                            "line": 2,
-                            "message": 3
-                        }
-                    ]
-                }
-            ]
+            }
         },
         {
             "label": "flake8",
             "detail": "Run flake8 on python files.",
-            "type": "shell",
-            "command": "ament_flake8 src/",
+            "type": "ament",
+            "task": "flake8",
+            "path": "src/",
+            "problemMatcher": [
+                "$ament_flake8"
+            ],
             "presentation": {
                 "panel": "dedicated",
                 "reveal": "silent",
                 "clear": true
-            },
-            "problemMatcher": [
-                {
-                  "owner": "flake8",
-                  "source": "flake8",
-                  "pattern": [
-                    {
-                      "code": 4,
-                      "column": 3,
-                      "file": 1,
-                      "line": 2,
-                      "message": 5,
-                      "regexp": "^(.+):(\\d+):(\\d+): (\\w\\d+) (.+)$"
-                    }
-                  ]
-                }
-              ]
+            }
         },
         {
             "label": "pep257",
             "detail": "Run pep257 on python files.",
-            "type": "shell",
-            "command": "ament_pep257 src/",
+            "type": "ament",
+            "task": "pep257",
+            "path": "src/",
+            "problemMatcher": [
+                "$ament_pep257"
+            ],
             "presentation": {
                 "panel": "dedicated",
                 "reveal": "silent",
                 "clear": true
-            },
-            "problemMatcher": [
-                {
-                    "owner": "pep257",
-                    "source": "pep257",
-                    "pattern": [
-                        {
-                            "regexp": "^(.+):(\\d+)\\s+(.+):\\s+(.+):\\s+(.+)$",
-                            "file": 1,
-                            "line": 2,
-                            "code": 4,
-                            "message": 5
-                        }
-                    ]
-                }
-            ]
+            }
         },
         {
             "label": "xmllint",
             "detail": "Run xmllint on xml files.",
-            "type": "shell",
-            "command": "ament_xmllint src/",
+            "type": "ament",
+            "task": "xmllint",
+            "path": "src/",
+            "problemMatcher": [ 
+                "$ament_xmllint",
+            ],
             "presentation": {
                 "panel": "dedicated",
                 "reveal": "silent",
                 "clear": true
-            },
-            "problemMatcher": [
-                {
-                    "owner": "xmllint",
-                    "source": "xmllint",
-                    "fileLocation": "absolute",
-                    "pattern": [
-                        {
-                            "regexp": "^(.+):(\\d+):\\s+(.+)\\s+:\\s+(.+)$",
-                            "file": 1,
-                            "line": 2,
-                            "code": 3,
-                            "message": 4
-                        }
-                    ]
-                }
-            ]
+            }
         },
         {
             "label": "lint all",
             "detail": "Run all linters.",
-            "dependsOn":["cppcheck", "cpplint", "flake8", "lint_cmake", "pep257","xmllint", "uncrustify"],
+            "dependsOn": [
+                "cppcheck",
+                "cpplint",
+                "flake8",
+                "lint_cmake",
+                "pep257",
+                "xmllint"
+            ],
             "problemMatcher": []
         },
         // Workspace editing tasks
@@ -282,7 +222,8 @@
             "type": "shell",
             "command": "sudo apt-get update && rosdep update && rosdep install --from-paths src --ignore-src -y",
             "problemMatcher": []
-        }
+        },
+
     ],
     "inputs": [
         {
