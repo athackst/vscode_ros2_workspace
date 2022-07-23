@@ -13,4 +13,4 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Build and push docs
-        uses: athackst/mkdocs-simple-plugin@v1.0.0
+        uses: athackst/mkdocs-simple-plugin@v1.1.1
