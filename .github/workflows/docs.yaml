@@ -1,9 +1,10 @@
 name: docs
 
 on:
+  release:
   push:
-    branches:
-      - "foxy"
+    tags:
+      - 'v*'
   workflow_dispatch:
 
 jobs:
