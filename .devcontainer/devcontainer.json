@@ -15,7 +15,7 @@
 		"--volume=/tmp/.X11-unix:/tmp/.X11-unix",
 		"--gpus=all"
 	],
-	"containerEnv": { 
+	"containerEnv": {
 		"DISPLAY": "${localEnv:DISPLAY}",
 		"LIBGL_ALWAYS_SOFTWARE": "1" // Needed for software rendering of opengl
 	},
@@ -29,16 +29,16 @@
 		"terminal.integrated.defaultProfile.linux": "bash"
 	},
 	"extensions": [
-		"dotjoshjohnson.xml",
-		"zachflower.uncrustify",
+		"althack.ament-task-provider",
+		"DotJoshJohnson.xml",
 		"ms-azuretools.vscode-docker",
-		"ms-iot.vscode-ros",
 		"ms-python.python",
 		"ms-vscode.cpptools",
 		"redhat.vscode-yaml",
 		"smilerobotics.urdf",
 		"streetsidesoftware.code-spell-checker",
 		"twxs.cmake",
-		"yzhang.markdown-all-in-one"
+		"yzhang.markdown-all-in-one",
+		"zachflower.uncrustify"
 	]
 }
