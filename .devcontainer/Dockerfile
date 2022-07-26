@@ -34,3 +34,5 @@ RUN echo "if [ -f ${WORKSPACE}/install/setup.bash ]; then source ${WORKSPACE}/in
 # Env vars for the nvidia-container-runtime.
 #ENV NVIDIA_VISIBLE_DEVICES all
 #ENV NVIDIA_DRIVER_CAPABILITIES graphics,utility,compute
+
+#ENV QT_X11_NO_MITSHM=1

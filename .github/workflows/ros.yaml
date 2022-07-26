@@ -8,7 +8,7 @@ on:
 jobs:
   test:
     name: test
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - 
         name: Checkout code
@@ -19,7 +19,7 @@ jobs:
 
   lint:
     name: ament_${{ matrix.linter }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     strategy:
       fail-fast: false
       matrix:
