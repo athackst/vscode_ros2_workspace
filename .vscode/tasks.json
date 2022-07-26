@@ -188,7 +188,8 @@
                 "flake8",
                 "lint_cmake",
                 "pep257",
-                "xmllint"
+                "xmllint",
+                "uncrustify"
             ],
             "problemMatcher": []
         },

@@ -37,6 +37,7 @@
         "**/log": true
     },
     "cSpell.words": [
+        "RTPS",
         "athackst",
         "autopep",
         "cmake",
@@ -69,5 +70,5 @@
         ".vscode",
         ".vscode-insiders",
         ".devcontainer/devcontainer.json"
-    ],
+    ]
 }
