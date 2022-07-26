@@ -4,13 +4,13 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/opt/ros/humble/include/**"
+                "/opt/ros/foxy/include/**"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
             "compileCommands": "${workspaceFolder}/build/compile_commands.json",
             "cStandard": "c99",
-            "cppStandard": "c++17",
+            "cppStandard": "c++14",
             "intelliSenseMode": "linux-gcc-x64"
         }
     ],
