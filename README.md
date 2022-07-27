@@ -25,7 +25,7 @@ This template sets up debugging for python files and gdb for cpp programs.  See 
 
 ### Continuous Integration
 
-The template also comes with basic continuous integration set up. See [`.github/workflows/ros.yaml`](/.github/workflows/ros.yaml).  
+The template also comes with basic continuous integration set up. See [`.github/workflows/ros.yaml`](/.github/workflows/ros.yaml).
 
 To remove a linter just delete it's name from this line:
 
@@ -86,6 +86,10 @@ VSCode will build the dockerfile inside of `.devcontainer` for you.  If you open
 ### Update the template with your code
 
 1. Specify the repositories you want to include in your workspace in `src/ros2.repos` or delete `src/ros2.repos` and develop directly within the workspace.
-   1. If you are using a `ros2.repos` file, import the contents `Terminal->Run Task..->import from workspace file`
+2. If you are using a `ros2.repos` file, import the contents `Terminal->Run Task..->import from workspace file`
 2. Install dependencies `Terminal->Run Task..->install dependencies`
-3. Develop!
+3. (optional) Adjust scripts to your liking.  These scripts are used both within tasks and CI.
+   1. `setup.sh` The setup commands for your code.  Default to import workspace and install dependencies.
+   2. `build.sh` The build commands for your code.  Default to `--merge-install` and `--symlink-install`
+   3. `test.sh` The test commands for your code.
+4. Develop!
