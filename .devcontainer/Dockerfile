@@ -17,6 +17,7 @@ ARG WORKSPACE
 RUN echo "if [ -f ${WORKSPACE}/install/setup.bash ]; then source ${WORKSPACE}/install/setup.bash; fi" >> /home/ros/.bashrc
 
 # libraries for opengl in the container
+ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
  && apt-get install -y -qq --no-install-recommends \
   libglvnd0 \
