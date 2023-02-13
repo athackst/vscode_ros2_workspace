@@ -23,7 +23,7 @@
         "--max-line-length=100"
     ],
     "C_Cpp.default.intelliSenseMode": "linux-gcc-x86",
-    "C_Cpp.formatting": "Disabled",
+    "C_Cpp.formatting": "disabled",
     "uncrustify.configPath.linux": "/opt/ros/humble/lib/python3.10/site-packages/ament_uncrustify/configuration/ament_code_style.cfg",
     "[cpp]": {
         "editor.defaultFormatter": "zachflower.uncrustify"

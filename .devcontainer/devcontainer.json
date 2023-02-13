@@ -19,25 +19,22 @@
 		"LIBGL_ALWAYS_SOFTWARE": "1" // Needed for software rendering of opengl
 	},
 	// Set *default* container specific settings.json values on container create.
-	"settings": {
-		"terminal.integrated.profiles.linux": {
-			"bash": {
-				"path": "bash"
-			}
-		},
-		"terminal.integrated.defaultProfile.linux": "bash"
-	},
-	"extensions": [
-		"althack.ament-task-provider",
-		"DotJoshJohnson.xml",
-		"ms-azuretools.vscode-docker",
-		"ms-python.python",
-		"ms-vscode.cpptools",
-		"redhat.vscode-yaml",
-		"smilerobotics.urdf",
-		"streetsidesoftware.code-spell-checker",
-		"twxs.cmake",
-		"yzhang.markdown-all-in-one",
-		"zachflower.uncrustify"
-	]
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"althack.ament-task-provider",
+				"DotJoshJohnson.xml",
+				"ms-azuretools.vscode-docker",
+				"ms-python.python",
+				"ms-vscode.cpptools",
+				"redhat.vscode-yaml",
+				"smilerobotics.urdf",
+				"streetsidesoftware.code-spell-checker",
+				"twxs.cmake",
+				"yzhang.markdown-all-in-one",
+				"zachflower.uncrustify",
+				"betwo.b2-catkin-tools"
+			]
+		}
+	}
 }
