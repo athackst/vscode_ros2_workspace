@@ -14,10 +14,29 @@
     },
     // Example gdb launch of a ros executable
     {
-      "name": "(gdb) Launch",
+      "name": "(gdb) Launch (merge-install)",
       "type": "cppdbg",
       "request": "launch",
       "program": "${workspaceFolder}/install/lib/${input:package}/${input:program}",
+      "args": [],
+      "preLaunchTask": "build",
+      "stopAtEntry": true,
+      "cwd": "${workspaceFolder}",
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    },
+    {
+      "name": "(gdb) Launch (isolated-install)",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/install/${input:package}/lib/${input:package}/${input:program}",
       "args": [],
       "preLaunchTask": "build",
       "stopAtEntry": true,
