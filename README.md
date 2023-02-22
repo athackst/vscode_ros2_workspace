@@ -92,3 +92,54 @@ VSCode will build the dockerfile inside of `.devcontainer` for you.  If you open
    * `build.sh` The build commands for your code.  Default to `--merge-install` and `--symlink-install`
    * `test.sh` The test commands for your code.
 5. Develop!
+
+
+## FAQ
+
+### WSL2
+
+#### The gui doesn't show up
+
+This is likely because the DISPLAY environment variable is not getting set properly.
+
+1. Find out what your DISPLAY variable should be
+
+      In your WSL2 Ubuntu instance
+
+      ```
+      echo $DISPLAY
+      ```
+
+2. Copy that value into the `.devcontainer/devcontainer.json` file
+
+      ```jsonc
+      	"containerEnv": {
+		      "DISPLAY": ":0",
+         }
+      ```
+
+#### I want to use vGPU
+
+If you want to access the vGPU through WSL2, you'll need to add additional components to the `.devcontainer/devcontainer.json` file in accordance to [these directions](https://github.com/microsoft/wslg/blob/main/samples/container/Containers.md)
+
+```jsonc
+	"runArgs": [
+		"--network=host",
+		"--cap-add=SYS_PTRACE",
+		"--security-opt=seccomp:unconfined",
+		"--security-opt=apparmor:unconfined",
+		"--volume=/tmp/.X11-unix:/tmp/.X11-unix",
+		"--volume=/mnt/wslg:/mnt/wslg",
+		"--volume=/usr/lib/wsl:/usr/lib/wsl",
+		"--device=/dev/dxg",
+      		"--gpus=all"
+	],
+	"containerEnv": {
+		"DISPLAY": "${localEnv:DISPLAY}", // Needed for GUI try ":0" for windows
+		"WAYLAND_DISPLAY": "${localEnv:WAYLAND_DISPLAY}",
+		"XDG_RUNTIME_DIR": "${localEnv:XDG_RUNTIME_DIR}",
+		"PULSE_SERVER": "${localEnv:PULSE_SERVER}",
+		"LD_LIBRARY_PATH": "/usr/lib/wsl/lib",
+		"LIBGL_ALWAYS_SOFTWARE": "1" // Needed for software rendering of opengl
+	},
+```
