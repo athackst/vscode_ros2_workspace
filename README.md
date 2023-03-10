@@ -21,7 +21,7 @@ Take a look at [how I develop using tasks](https://www.allisonthackston.com/arti
 
 ### Debugging
 
-This template sets up debugging for python files and gdb for cpp programs.  See [`.vscode/launch.json`](.vscode/launch.json) for configuration details.
+This template sets up debugging for python files, gdb for cpp programs and ROS launch files.  See [`.vscode/launch.json`](.vscode/launch.json) for configuration details.
 
 ### Continuous Integration
 
