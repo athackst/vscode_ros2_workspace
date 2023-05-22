@@ -1,4 +1,6 @@
 {
+    // wayland (gui) passthrough
+    "dev.containers.mountWaylandSocket": true,
     "editor.tabSize": 8,
     "editor.rulers": [
         100
