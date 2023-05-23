@@ -13,6 +13,8 @@
 		"--security-opt=seccomp:unconfined",
 		"--security-opt=apparmor:unconfined",
 		"--volume=/tmp/.X11-unix:/tmp/.X11-unix",
+		// needed for X11 credentials
+		"--volume=/tmp/.${devcontainerId}.xauth:/tmp/.Xauthority",
 		"--volume=/mnt/wslg:/mnt/wslg",
 		"--ipc=host"
 	],
@@ -20,6 +22,7 @@
 		"DISPLAY": "${localEnv:DISPLAY}", // Needed for GUI try ":0" for windows
 		"WAYLAND_DISPLAY": "${localEnv:WAYLAND_DISPLAY}",
 		"XDG_RUNTIME_DIR": "${localEnv:XDG_RUNTIME_DIR}",
+		"XAUTHORITY": "/tmp/.Xauthority", // needed for X11 credentials
 		"PULSE_SERVER": "${localEnv:PULSE_SERVER}",
 		"LIBGL_ALWAYS_SOFTWARE": "1" // Needed for software rendering of opengl
 	},
@@ -43,4 +46,6 @@
 			]
 		}
 	}
+	// needed for X11 credentials
+	"initializeCommand": "if [ ! -f /tmp/.${devcontainerId}.xauth ]; then touch /tmp/.${devcontainerId}.xauth; fi && xauth nlist :0 | sed -e 's/^..../ffff/' | xauth -f /tmp/.${devcontainerId}.xauth nmerge -"
 }
