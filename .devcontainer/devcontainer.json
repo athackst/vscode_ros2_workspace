@@ -45,7 +45,7 @@
 				"zachflower.uncrustify"
 			]
 		}
-	}
+	},
 	// needed for X11 credentials
 	"initializeCommand": "if [ ! -f /tmp/.${devcontainerId}.xauth ]; then touch /tmp/.${devcontainerId}.xauth; fi && xauth nlist :0 | sed -e 's/^..../ffff/' | xauth -f /tmp/.${devcontainerId}.xauth nmerge -"
 }
