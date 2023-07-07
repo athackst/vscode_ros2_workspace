@@ -228,6 +228,13 @@
             "type": "shell",
             "command": "./setup.sh",
             "problemMatcher": []
+        },
+        {
+            "label": "add submodules from .repos",
+            "detail": "Create a git submodule for all repositories in your .repos file",
+            "type": "shell",
+            "command": "python3 .devcontainer/repos_to_submodules.py",
+            "problemMatcher": []
         }
     ],
     "inputs": [
