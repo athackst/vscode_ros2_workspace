@@ -3,6 +3,11 @@ name: ROS
 on:
   pull_request:
   push:
+    branches: 
+      - foxy*
+      - humble*
+      - iron*
+      - main
   workflow_dispatch:
     
 jobs:
@@ -33,3 +38,13 @@ jobs:
         uses: ./.github/actions/lint/
         env: 
           LINTER: ${{ matrix.linter }}
+
+  complete:
+    name: Tests passed
+    needs:
+      - lint
+      - test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check
+        run: echo "Completed successfully!"
