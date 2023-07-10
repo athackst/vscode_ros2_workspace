@@ -143,3 +143,26 @@ If you want to access the vGPU through WSL2, you'll need to add additional compo
 		"LIBGL_ALWAYS_SOFTWARE": "1" // Needed for software rendering of opengl
 	},
 ```
+
+### Repos are not showing up in VS Code source control
+
+This is likely because vscode doesn't necessarily know about other repositories unless you've added them directly. 
+
+```
+File->Add Folder To Workspace
+```
+
+![Screenshot-26](https://github.com/athackst/vscode_ros2_workspace/assets/6098197/d8711320-2c16-463b-9d67-5bd9314acc7f)
+
+
+Or you've added them as a git submodule.
+
+![Screenshot-27](https://github.com/athackst/vscode_ros2_workspace/assets/6098197/8ebc9aac-9d70-4b53-aa52-9b5b108dc935)
+
+To add all of the repos in your *.repos file, run the script
+
+```bash
+python3 .devcontainer/repos_to_submodules.py
+```
+
+or run the task titled `add submodules from .repos`
