@@ -1,4 +1,4 @@
-FROM althack/ros2:iron-dev 
+FROM althack/ros2:rolling-dev 
 
 # ** [Optional] Uncomment this section to install additional packages. **
 #
