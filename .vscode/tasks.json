@@ -51,7 +51,7 @@
             "label": "purge",
             "detail": "Purge workspace by deleting all generated files.",
             "type": "shell",
-            "command": "rm -fr build install log; py3clean .",
+            "command": "sudo rm -fr build install log; sudo py3clean .",
             "problemMatcher": []
         },
         // Linting and static code analysis tasks
