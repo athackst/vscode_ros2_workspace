@@ -4,10 +4,9 @@ on:
   pull_request:
   push:
     branches: 
-      - foxy*
       - humble*
       - iron*
-      - main
+      - rolling*
   workflow_dispatch:
     
 jobs:
