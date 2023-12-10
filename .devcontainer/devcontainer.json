@@ -33,7 +33,6 @@
 				"betwo.b2-catkin-tools",
 				"DotJoshJohnson.xml",
 				"ms-azuretools.vscode-docker",
-				"ms-iot.vscode-ros",
 				"ms-python.python",
 				"ms-vscode.cpptools",
 				"redhat.vscode-yaml",
@@ -41,7 +40,8 @@
 				"streetsidesoftware.code-spell-checker",
 				"twxs.cmake",
 				"yzhang.markdown-all-in-one",
-				"zachflower.uncrustify"
+				"zachflower.uncrustify",
+				"ms-iot.vscode-ros"
 			]
 		}
 	}
