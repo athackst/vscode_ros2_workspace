@@ -17,6 +17,14 @@
 		"--ipc=host"
 		// uncomment to use intel iGPU
 		// "--device=/dev/dri"
+		// uncomment to use Nvidia GPU with Linux, https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html
+		// "--runtime=nvidia"
+		// uncomment to use Nvidia GPU with Windows WSL2
+		// "--volume=/usr/lib/wsl:/usr/lib/wsl",
+		// "--device=/dev/dxg",
+		// "--device=/dev/dri/card0",
+		// "--device=/dev/dri/renderD128",
+		// "--gpus=all"
 	],
 	"containerEnv": {
 		"DISPLAY": "${localEnv:DISPLAY}", // Needed for GUI try ":0" for windows
