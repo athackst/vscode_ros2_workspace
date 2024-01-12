@@ -51,7 +51,7 @@
             "label": "purge",
             "detail": "Purge workspace by deleting all generated files.",
             "type": "shell",
-            "command": "rm -fr build install log; py3clean .",
+            "command": "sudo rm -fr build install log; sudo py3clean .",
             "problemMatcher": []
         },
         // Linting and static code analysis tasks
@@ -227,6 +227,13 @@
             "detail": "Set up the workspace",
             "type": "shell",
             "command": "./setup.sh",
+            "problemMatcher": []
+        },
+        {
+            "label": "add submodules from .repos",
+            "detail": "Create a git submodule for all repositories in your .repos file",
+            "type": "shell",
+            "command": "python3 .devcontainer/repos_to_submodules.py",
             "problemMatcher": []
         }
     ],

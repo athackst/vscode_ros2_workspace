@@ -50,7 +50,22 @@
           "ignoreFailures": true
         }
       ]
-    }
+    },
+    //Example of a ROS Launch file
+    {
+      "name": "ROS: Launch File (merge-install)",
+      "type": "ros",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "target": "${workspaceFolder}/install/share/${input:package}/launch/${input:ros_launch}",
+    },
+    {
+      "name": "ROS: Launch File (isolated-install)",
+      "type": "ros",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "target": "${workspaceFolder}/install/${input:package}/share/${input:package}/launch/${input:ros_launch}",
+    },
   ],
   "inputs": [
     {
@@ -64,6 +79,12 @@
       "type": "promptString",
       "description": "Program name",
       "default": "publisher_member_function"
+    },
+    {
+      "id": "ros_launch",
+      "type": "promptString",
+      "description": "ROS launch name",
+      "default": "file_name_launch.py"
     }
   ]
 }
