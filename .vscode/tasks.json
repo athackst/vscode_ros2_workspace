@@ -54,6 +54,13 @@
             "command": "sudo rm -fr build install log; sudo py3clean .",
             "problemMatcher": []
         },
+        {
+            "label": "source",
+            "detail": "Source workspace",
+            "type": "shell",
+            "command": "source /opt/ros/humble/setup.bash",
+            "problemMatcher": []
+        },
         // Linting and static code analysis tasks
         {
             "label": "fix",
