@@ -11,7 +11,7 @@ See [how I develop with vscode and ros2](https://www.allisonthackston.com/articl
 ROS2-approved formatters are included in the IDE.  
 
 * **c++** uncrustify; config from `ament_uncrustify`
-* **python** autopep8; vscode settings consistent with the [style guide](https://index.ros.org/doc/ros2/Contributing/Code-Style-Language-Versions/)
+* **python** autopep8; vscode settings consistent with the [style guide](https://docs.ros.org/en/humble/The-ROS2-Project/Contributing/Code-Style-Language-Versions.html)
 
 ### Tasks
 
