@@ -11,7 +11,7 @@ See [how I develop with vscode and ros2](https://www.allisonthackston.com/articl
 ROS2-approved formatters are included in the IDE.  
 
 * **c++** uncrustify; config from `ament_uncrustify`
-* **python** autopep8; vscode settings consistent with the [style guide](https://docs.ros.org/en/humble/The-ROS2-Project/Contributing/Code-Style-Language-Versions.html)
+* **python** autopep8; vscode settings consistent with the [style guide](https://docs.ros.org/en/jazzy/The-ROS2-Project/Contributing/Code-Style-Language-Versions.html)
 
 ### Tasks
 
@@ -52,7 +52,7 @@ Click on "use this template"
 
 ### Create your repository
 
-On the next dialog, name the repository you would like to start and decide if you want all of the branches, or just the latest LTS: humble.
+On the next dialog, name the repository you would like to start and decide if you want all of the branches, or just the latest LTS: jazzy.
 
 ![template_new](https://user-images.githubusercontent.com/6098197/91332035-713ee980-e780-11ea-81d3-13b170f568b0.png)
 

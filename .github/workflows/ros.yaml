@@ -6,6 +6,7 @@ on:
     branches: 
       - humble*
       - iron*
+      - jazzy*
       - rolling*
   workflow_dispatch:
     
