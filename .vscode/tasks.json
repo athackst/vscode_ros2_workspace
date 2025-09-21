@@ -58,7 +58,7 @@
             "label": "source",
             "detail": "Source workspace",
             "type": "shell",
-            "command": "source /opt/ros/jazzy/setup.bash",
+            "command": "source /opt/ros/${env:ROS_DISTRO}/setup.bash",
             "problemMatcher": []
         },
         // Linting and static code analysis tasks
@@ -212,7 +212,7 @@
             "label": "import from workspace file",
             "detail": "Use vcs to import modules specified by a workspace/rosinstall file.",
             "type": "shell",
-            "command": "vcs import < src/ros2.repos src",
+            "command": "envsubst < src/ros2.repos | vcs import src",
             "problemMatcher": []
         },
         {

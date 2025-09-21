@@ -1,30 +1,43 @@
-// See https://aka.ms/vscode-remote/devcontainer.json for format details.
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
 {
 	"dockerFile": "Dockerfile",
 	"build": {
 		"args": {
 			"WORKSPACE": "${containerWorkspaceFolder}"
-		}
+			// "USERNAME": "ros",
+			// "USER_UID": "1000", //Change to match your UID
+			// "USER_GID": "1000" // Change to match your GID
+		},
+		"options": ["--pull"]
 	},
-	"remoteUser": "ros",
 	"runArgs": [
 		"--network=host",
 		"--cap-add=SYS_PTRACE",
 		"--security-opt=seccomp:unconfined",
 		"--security-opt=apparmor:unconfined",
-		"--volume=/tmp/.X11-unix:/tmp/.X11-unix",
+		// X11 host
+		"--volume=/tmp/.X11-unix:/tmp/.X11-unix:rw",
+		// Wayland host
 		"--volume=/mnt/wslg:/mnt/wslg",
-		"--ipc=host"
 		// uncomment to use intel iGPU
 		// "--device=/dev/dri"
+		// Share user run time settings
+		"--volume=/run/user/1000:/run/user/1000", // Change 1000 to match your UID
+		"--ipc=host"
 	],
 	"containerEnv": {
 		"DISPLAY": "${localEnv:DISPLAY}", // Needed for GUI try ":0" for windows
+		"XAUTHORITY": "${localEnv:XAUTHORITY}",
+		// For Wayland
 		"WAYLAND_DISPLAY": "${localEnv:WAYLAND_DISPLAY}",
 		"XDG_RUNTIME_DIR": "${localEnv:XDG_RUNTIME_DIR}",
+		// "QT_QPA_PLATFORM": "wayland", // uncomment to force Wayland
+		// For audio
 		"PULSE_SERVER": "${localEnv:PULSE_SERVER}",
 		"LIBGL_ALWAYS_SOFTWARE": "1" // Needed for software rendering of opengl
 	},
+	"remoteUser": "ros",
 	// Set *default* container specific settings.json values on container create.
 	"customizations": {
 		"vscode": {
@@ -33,11 +46,11 @@
 				"betwo.b2-catkin-tools",
 				"DotJoshJohnson.xml",
 				"ms-azuretools.vscode-docker",
-				"ms-iot.vscode-ros",
+				"ms-python.autopep8",
 				"ms-python.python",
 				"ms-vscode.cpptools",
+				"Ranch-Hand-Robotics.rde-pack",
 				"redhat.vscode-yaml",
-				"smilerobotics.urdf",
 				"streetsidesoftware.code-spell-checker",
 				"twxs.cmake",
 				"yzhang.markdown-all-in-one",

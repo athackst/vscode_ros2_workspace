@@ -52,7 +52,12 @@ Click on "use this template"
 
 ### Create your repository
 
-On the next dialog, name the repository you would like to start and decide if you want all of the branches, or just the latest LTS: jazzy.
+On the next dialog, name the repository you would like to start and decide if you want all of the branches, or the default branch.
+
+> [!IMPORTANT]
+> The new default branch supports any version of ROS by setting the appropriate version you want in the 'FROM' line in `.devcontainer/Dockerfile`
+> 
+> By default, this is set to `osrf/ros:jazzy-desktop-full`
 
 ![template_new](https://user-images.githubusercontent.com/6098197/91332035-713ee980-e780-11ea-81d3-13b170f568b0.png)
 
@@ -95,6 +100,86 @@ VSCode will build the dockerfile inside of `.devcontainer` for you.  If you open
 
 
 ## FAQ
+
+## XAuthority
+
+If you see the error:
+
+```
+Authorization required, but no authorization protocol specified Unable to open display: :0 Authorization required, but no authorization protocol specified
+```
+
+You may need to update the UID/GID to match yours.  In `.devcontainer/devcontainer.json` update the lines that are marked `Change to match your UID` and `Change to match your GID`
+
+.devcontainer/devcontainer.json
+```jsonc
+	"build": {
+		"args": {
+			"WORKSPACE": "${containerWorkspaceFolder}"
+			// "USERNAME": "ros",
+			// "USER_UID": "1000", //Change to match your UID
+			// "USER_GID": "1000" // Change to match your GID
+		},
+		"options": ["--pull"]
+	},
+	...
+	"runArgs": [
+		"--network=host",
+		"--cap-add=SYS_PTRACE",
+		"--security-opt=seccomp:unconfined",
+		"--security-opt=apparmor:unconfined",
+		// X11 host
+		"--volume=/tmp/.X11-unix:/tmp/.X11-unix:rw",
+		// Wayland host
+		"--volume=/mnt/wslg:/mnt/wslg",
+		// uncomment to use intel iGPU
+		// "--device=/dev/dri"
+		// Share user run time settings
+		"--volume=/run/user/1000:/run/user/1000", // Change 1000 to match your UID
+		"--ipc=host"
+	],
+```
+
+
+## XDisplay
+
+If you see the error:
+
+```
+Couldnt open X display in GLXGLSupport::getGLDisplay at ./.obj-x86_64-linux-gnu/ogre_vendor-prefix/src/ogre_vendor/RenderSystems/GLSupport/src/GLX/OgreGLXGLSupport.cpp
+```
+
+You need to remove or comment out the wayland options
+
+```
+	"runArgs": [
+		"--network=host",
+		"--cap-add=SYS_PTRACE",
+		"--security-opt=seccomp:unconfined",
+		"--security-opt=apparmor:unconfined",
+		// X11 host
+		"--volume=/tmp/.X11-unix:/tmp/.X11-unix:rw",
+  		"--volume=/tmp/.docker.xauth:/tmp/.docker.xauth:ro",
+		// Wayland host
+		//"--volume=/mnt/wslg:/mnt/wslg",
+		// "--volume=/run/user/1000:/run/user/1000",
+		// uncomment to use intel iGPU
+		// "--device=/dev/dri"
+		"--ipc=host"
+	],
+	"remoteUser": "ros",
+	"containerEnv": {
+		"DISPLAY": "${localEnv:DISPLAY}", // Needed for GUI try ":0" for windows
+		"XAUTHORITY": "/tmp/.docker.xauth",
+		// For Wayland
+		// "WAYLAND_DISPLAY": "${localEnv:WAYLAND_DISPLAY}",
+		// "XDG_RUNTIME_DIR": "${localEnv:XDG_RUNTIME_DIR}",
+		// "QT_QPA_PLATFORM": "wayland", // Force Wayland
+		// For audio
+		"PULSE_SERVER": "${localEnv:PULSE_SERVER}",
+		"LIBGL_ALWAYS_SOFTWARE": "1" // Needed for software rendering of opengl
+	},
+```
 
 ### WSL2
 
