@@ -1,12 +1,13 @@
-// See https://aka.ms/vscode-remote/devcontainer.json for format details.
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
 {
 	"dockerFile": "Dockerfile",
 	"build": {
 		"args": {
 			"WORKSPACE": "${containerWorkspaceFolder}"
-		}
+		},
+		"options": ["--pull"]
 	},
-	"remoteUser": "ros",
 	"runArgs": [
 		"--network=host",
 		"--cap-add=SYS_PTRACE",
@@ -33,11 +34,11 @@
 				"betwo.b2-catkin-tools",
 				"DotJoshJohnson.xml",
 				"ms-azuretools.vscode-docker",
-				"ms-iot.vscode-ros",
+				"ms-python.autopep8",
 				"ms-python.python",
 				"ms-vscode.cpptools",
+				"Ranch-Hand-Robotics.rde-pack",
 				"redhat.vscode-yaml",
-				"smilerobotics.urdf",
 				"streetsidesoftware.code-spell-checker",
 				"twxs.cmake",
 				"yzhang.markdown-all-in-one",

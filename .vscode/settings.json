@@ -18,10 +18,7 @@
     // Environment file lets vscode find python files within workspace
     "python.envFile": "${workspaceFolder}/.env",
     // Use the system installed version of autopep8
-    "python.formatting.autopep8Path": "/usr/bin/autopep8",
-    "python.formatting.autopep8Args": [
-        "--max-line-length=100"
-    ],
+    "autopep8.args": ["--max-line-length=100"],
     "C_Cpp.default.intelliSenseMode": "linux-gcc-x86",
     "C_Cpp.formatting": "disabled",
     "uncrustify.configPath.linux": "/opt/ros/jazzy/lib/python3.12/site-packages/ament_uncrustify/configuration/ament_code_style.cfg",
@@ -72,4 +69,5 @@
         ".devcontainer/devcontainer.json"
     ],
     "ament-task-provider.envSetup": "source /opt/ros/jazzy/setup.bash",
+    "ROS2.distro": "jazzy",
 }
