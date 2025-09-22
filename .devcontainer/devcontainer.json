@@ -4,7 +4,8 @@
 	"dockerFile": "Dockerfile",
 	"build": {
 		"args": {
-			"WORKSPACE": "${containerWorkspaceFolder}"
+			"WORKSPACE": "${containerWorkspaceFolder}",
+			"ROS_DISTRO": "jazzy"
 		},
 		"options": ["--pull"]
 	},

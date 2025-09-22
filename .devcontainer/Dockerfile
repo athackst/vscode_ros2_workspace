@@ -1,10 +1,13 @@
-FROM ros:jazzy-ros-base-noble
+ARG ROS_DISTRO=jazzy
+
+FROM ros:${ROS_DISTRO}
 
 # Set up dev packages
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
    && apt-get -y install --no-install-recommends \
     bash-completion \
+    gettext-base \
     git-core \
     openssh-client \
     python3-argcomplete \
@@ -49,3 +52,5 @@ RUN  echo "if [ -f /opt/ros/${ROS_DISTRO}/setup.bash ]; then source /opt/ros/${R
   && echo "if [ -f ${WORKSPACE}/install/setup.bash ]; then source ${WORKSPACE}/install/setup.bash; fi" >> /home/$USERNAME/.bashrc
 
 ENV AMENT_CPPCHECK_ALLOW_SLOW_VERSIONS=1
+RUN PYTHON_VERSION=$(python3 -c "import sys; print(f'{sys.version_info[0]}.{sys.version_info[1]}')")
+ENV PYTHON_VERSION=${PYTHON_VERSION}

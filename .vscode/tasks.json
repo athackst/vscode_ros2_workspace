@@ -58,7 +58,7 @@
             "label": "source",
             "detail": "Source workspace",
             "type": "shell",
-            "command": "source /opt/ros/jazzy/setup.bash",
+            "command": "source /opt/ros/${env:ROS_DISTRO}/setup.bash",
             "problemMatcher": []
         },
         // Linting and static code analysis tasks
