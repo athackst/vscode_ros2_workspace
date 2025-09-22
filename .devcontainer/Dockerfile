@@ -1,6 +1,6 @@
 ARG ROS_DISTRO=jazzy
 
-FROM ros:${ROS_DISTRO}
+FROM osrf/ros:${ROS_DISTRO}-desktop-full
 
 # Set up dev packages
 ENV DEBIAN_FRONTEND=noninteractive
@@ -14,14 +14,18 @@ RUN apt-get update \
     python3-colcon-common-extensions \
     python3-vcs2l \
     sudo \
+    # For GUI
+    libx11-xcb1 libxcb1 libxcb-render0 libxcb-shm0 libxcb-xfixes0 libxcb-shape0 \
+    libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-util1 \
+    libxcb-xinerama0 libxcb-xkb1 libxkbcommon0 libxkbcommon-x11-0 \
+    libglu1-mesa libxi6 libsm6 libxrender1 libfontconfig1 \
   && rm -rf /var/lib/apt/lists/*
 ENV DEBIAN_FRONTEND=dialog
 
-# Set up auto-source of workspace for ros user
+# Set up auto-source of workspace for ros 
 ARG USERNAME=ros
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
-ARG WORKSPACE=/home/$USERNAME/workspace
 
 # Find and replace any user with matching UID
 RUN set -eux; \
@@ -36,8 +40,8 @@ RUN set -eux; \
         echo "Created new user $USERNAME"; \
     fi
 # Ensure necessary directories and permissions
-RUN mkdir -p /home/$USERNAME /run/user/$USER_UID $WORKSPACE && \
-    chown -R $USER_UID:$USER_GID /home/$USERNAME /run/user/$USER_UID $WORKSPACE
+RUN mkdir -p /home/$USERNAME /run/user/$USER_UID && \
+    chown -R $USER_UID:$USER_GID /home/$USERNAME /run/user/$USER_UID
 
 # Add sudo support for the non-root user
 RUN echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$USERNAME \

@@ -96,6 +96,65 @@ VSCode will build the dockerfile inside of `.devcontainer` for you.  If you open
 
 ## FAQ
 
+## XAuthority
+
+If you see the error:
+
+```
+Authorization required, but no authorization protocol specified Unable to open display: :0 Authorization required, but no authorization protocol specified
+```
+
+You need to set up an xauth cookie and share it to the container
+
+```bash
+sudo apt install -y xauth
+
+DOCKER_XAUTH=/tmp/.docker.xauth
+touch "$DOCKER_XAUTH"
+xauth nlist "$DISPLAY" | sed -e 's/^..../ffff/' | xauth -f "$DOCKER_XAUTH" nmerge -
+chmod 644 "$DOCKER_XAUTH"
+```
+
+## XDisplay
+
+If you see the error:
+
+```
+Couldnt open X display in GLXGLSupport::getGLDisplay at ./.obj-x86_64-linux-gnu/ogre_vendor-prefix/src/ogre_vendor/RenderSystems/GLSupport/src/GLX/OgreGLXGLSupport.cpp
+```
+
+You need to remove or comment out the wayland options
+
+```
+	"runArgs": [
+		"--network=host",
+		"--cap-add=SYS_PTRACE",
+		"--security-opt=seccomp:unconfined",
+		"--security-opt=apparmor:unconfined",
+		// X11 host
+		"--volume=/tmp/.X11-unix:/tmp/.X11-unix:rw",
+  		"--volume=/tmp/.docker.xauth:/tmp/.docker.xauth:ro",
+		// Wayland host
+		//"--volume=/mnt/wslg:/mnt/wslg",
+		// "--volume=/run/user/1000:/run/user/1000",
+		// uncomment to use intel iGPU
+		// "--device=/dev/dri"
+		"--ipc=host"
+	],
+	"remoteUser": "ros",
+	"containerEnv": {
+		"DISPLAY": "${localEnv:DISPLAY}", // Needed for GUI try ":0" for windows
+		"XAUTHORITY": "/tmp/.docker.xauth",
+		// For Wayland
+		// "WAYLAND_DISPLAY": "${localEnv:WAYLAND_DISPLAY}",
+		// "XDG_RUNTIME_DIR": "${localEnv:XDG_RUNTIME_DIR}",
+		// "QT_QPA_PLATFORM": "wayland", // Force Wayland
+		// For audio
+		"PULSE_SERVER": "${localEnv:PULSE_SERVER}",
+		"LIBGL_ALWAYS_SOFTWARE": "1" // Needed for software rendering of opengl
+	},
+```
+
 ### WSL2
 
 #### The gui doesn't show up

@@ -5,7 +5,10 @@
 	"build": {
 		"args": {
 			"WORKSPACE": "${containerWorkspaceFolder}",
-			"ROS_DISTRO": "jazzy"
+			// "ROS_DISTRO": "jazzy",
+			// "USERNAME": "ros",
+			// "USER_UID": "1000", //Change to match your UID
+			// "USER_GID": "1000" // Change to match your GID
 		},
 		"options": ["--pull"]
 	},
@@ -14,17 +17,25 @@
 		"--cap-add=SYS_PTRACE",
 		"--security-opt=seccomp:unconfined",
 		"--security-opt=apparmor:unconfined",
-		"--volume=/tmp/.X11-unix:/tmp/.X11-unix",
+		// X11 host
+		"--volume=/tmp/.X11-unix:/tmp/.X11-unix:rw",
+		// Wayland host
 		"--volume=/mnt/wslg:/mnt/wslg",
-		"--ipc=host"
 		// uncomment to use intel iGPU
 		// "--device=/dev/dri"
+		// Share user run time settings
+		"--volume=/run/user/1000:/run/user/1000", // Change 1000 to match your UID
+		"--ipc=host"
 	],
 	"remoteUser": "ros",
 	"containerEnv": {
 		"DISPLAY": "${localEnv:DISPLAY}", // Needed for GUI try ":0" for windows
+		"XAUTHORITY": "${localEnv:XAUTHORITY}",
+		// For Wayland
 		"WAYLAND_DISPLAY": "${localEnv:WAYLAND_DISPLAY}",
 		"XDG_RUNTIME_DIR": "${localEnv:XDG_RUNTIME_DIR}",
+		// "QT_QPA_PLATFORM": "wayland", // uncomment to force Wayland
+		// For audio
 		"PULSE_SERVER": "${localEnv:PULSE_SERVER}",
 		"LIBGL_ALWAYS_SOFTWARE": "1" // Needed for software rendering of opengl
 	},
