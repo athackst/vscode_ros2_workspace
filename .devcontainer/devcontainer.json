@@ -4,8 +4,7 @@
 	"dockerFile": "Dockerfile",
 	"build": {
 		"args": {
-			"WORKSPACE": "${containerWorkspaceFolder}",
-			// "ROS_DISTRO": "jazzy",
+			"WORKSPACE": "${containerWorkspaceFolder}"
 			// "USERNAME": "ros",
 			// "USER_UID": "1000", //Change to match your UID
 			// "USER_GID": "1000" // Change to match your GID
@@ -27,7 +26,6 @@
 		"--volume=/run/user/1000:/run/user/1000", // Change 1000 to match your UID
 		"--ipc=host"
 	],
-	"remoteUser": "ros",
 	"containerEnv": {
 		"DISPLAY": "${localEnv:DISPLAY}", // Needed for GUI try ":0" for windows
 		"XAUTHORITY": "${localEnv:XAUTHORITY}",
@@ -39,6 +37,7 @@
 		"PULSE_SERVER": "${localEnv:PULSE_SERVER}",
 		"LIBGL_ALWAYS_SOFTWARE": "1" // Needed for software rendering of opengl
 	},
+	"remoteUser": "ros",
 	// Set *default* container specific settings.json values on container create.
 	"customizations": {
 		"vscode": {

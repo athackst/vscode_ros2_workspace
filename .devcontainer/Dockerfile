@@ -1,12 +1,11 @@
-ARG ROS_DISTRO=jazzy
-
-FROM osrf/ros:${ROS_DISTRO}-desktop-full
+FROM osrf/ros:jazzy-desktop-full
 
 # Set up dev packages
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
    && apt-get -y install --no-install-recommends \
     bash-completion \
+    gdb \
     gettext-base \
     git-core \
     openssh-client \
@@ -55,6 +54,9 @@ RUN  echo "if [ -f /opt/ros/${ROS_DISTRO}/setup.bash ]; then source /opt/ros/${R
   # Set up auto-source of workspace for user
   && echo "if [ -f ${WORKSPACE}/install/setup.bash ]; then source ${WORKSPACE}/install/setup.bash; fi" >> /home/$USERNAME/.bashrc
 
+# Set up python symlinks for vscode paths
+RUN PYTHON_VERSION=$(python3 -c "import sys; print(f'{sys.version_info[0]}.{sys.version_info[1]}')") \
+ && tgt="/opt/ros/${ROS_DISTRO}/lib/python${PYTHON_VERSION}/site-packages" \
+ && [ -d "$tgt" ] && ln -s "$tgt" "/opt/ros/${ROS_DISTRO}/lib/ros_site_packages"
+
 ENV AMENT_CPPCHECK_ALLOW_SLOW_VERSIONS=1
-RUN PYTHON_VERSION=$(python3 -c "import sys; print(f'{sys.version_info[0]}.{sys.version_info[1]}')")
-ENV PYTHON_VERSION=${PYTHON_VERSION}

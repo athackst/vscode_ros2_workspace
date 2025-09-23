@@ -52,7 +52,12 @@ Click on "use this template"
 
 ### Create your repository
 
-On the next dialog, name the repository you would like to start and decide if you want all of the branches, or just the latest LTS: jazzy.
+On the next dialog, name the repository you would like to start and decide if you want all of the branches, or the default branch.
+
+> [!IMPORTANT]
+> The new default branch supports any version of ROS by setting the appropriate version you want in the 'FROM' line in `.devcontainer/Dockerfile`
+> 
+> By default, this is set to `osrf/ros:jazzy-desktop-full`
 
 ![template_new](https://user-images.githubusercontent.com/6098197/91332035-713ee980-e780-11ea-81d3-13b170f568b0.png)
 
@@ -104,16 +109,37 @@ If you see the error:
 Authorization required, but no authorization protocol specified Unable to open display: :0 Authorization required, but no authorization protocol specified
 ```
 
-You need to set up an xauth cookie and share it to the container
+You may need to update the UID/GID to match yours.  In `.devcontainer/devcontainer.json` update the lines that are marked `Change to match your UID` and `Change to match your GID`
 
-```bash
-sudo apt install -y xauth
-
-DOCKER_XAUTH=/tmp/.docker.xauth
-touch "$DOCKER_XAUTH"
-xauth nlist "$DISPLAY" | sed -e 's/^..../ffff/' | xauth -f "$DOCKER_XAUTH" nmerge -
-chmod 644 "$DOCKER_XAUTH"
+.devcontainer/devcontainer.json
+```jsonc
+	"build": {
+		"args": {
+			"WORKSPACE": "${containerWorkspaceFolder}"
+			// "USERNAME": "ros",
+			// "USER_UID": "1000", //Change to match your UID
+			// "USER_GID": "1000" // Change to match your GID
+		},
+		"options": ["--pull"]
+	},
+	...
+	"runArgs": [
+		"--network=host",
+		"--cap-add=SYS_PTRACE",
+		"--security-opt=seccomp:unconfined",
+		"--security-opt=apparmor:unconfined",
+		// X11 host
+		"--volume=/tmp/.X11-unix:/tmp/.X11-unix:rw",
+		// Wayland host
+		"--volume=/mnt/wslg:/mnt/wslg",
+		// uncomment to use intel iGPU
+		// "--device=/dev/dri"
+		// Share user run time settings
+		"--volume=/run/user/1000:/run/user/1000", // Change 1000 to match your UID
+		"--ipc=host"
+	],
 ```
+
 
 ## XDisplay
 
