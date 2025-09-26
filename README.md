@@ -44,6 +44,13 @@ You should already have Docker and VSCode with the remote containers plugin inst
 * [vscode](https://code.visualstudio.com/)
 * [vscode remote containers plugin](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 
+#### NVidia support
+
+To make nvidia driver and opengl available in docker, follow the installation instructions for docker-nvidia.
+They include the steps in docker and add the additional gpu layer.
+
+* [docker-nvidia (includes docker install and additional installation for NVidia GPU accelerated hosts)](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
+
 ### Get the template
 
 Click on "use this template"
@@ -56,7 +63,7 @@ On the next dialog, name the repository you would like to start and decide if yo
 
 > [!IMPORTANT]
 > The new default branch supports any version of ROS by setting the appropriate version you want in the 'FROM' line in `.devcontainer/Dockerfile`
-> 
+>
 > By default, this is set to `osrf/ros:jazzy-desktop-full`
 
 ![template_new](https://user-images.githubusercontent.com/6098197/91332035-713ee980-e780-11ea-81d3-13b170f568b0.png)
@@ -71,7 +78,7 @@ Now you can clone your repo as normal
 
 ### Open it in vscode
 
-Now that you've cloned your repo onto your computer, you can open it in VSCode (File->Open Folder). 
+Now that you've cloned your repo onto your computer, you can open it in VSCode (File->Open Folder).
 
 When you open it for the first time, you should see a little popup that asks you if you would like to open it in a container.  Say yes!
 
@@ -98,87 +105,66 @@ VSCode will build the dockerfile inside of `.devcontainer` for you.  If you open
    * `test.sh` The test commands for your code.
 5. Develop!
 
-
 ## FAQ
 
-## XAuthority
+### XAuthority
 
 If you see the error:
 
-```
+```text
 Authorization required, but no authorization protocol specified Unable to open display: :0 Authorization required, but no authorization protocol specified
 ```
 
 You may need to update the UID/GID to match yours.  In `.devcontainer/devcontainer.json` update the lines that are marked `Change to match your UID` and `Change to match your GID`
 
 .devcontainer/devcontainer.json
+
 ```jsonc
-	"build": {
-		"args": {
-			"WORKSPACE": "${containerWorkspaceFolder}"
-			// "USERNAME": "ros",
-			// "USER_UID": "1000", //Change to match your UID
-			// "USER_GID": "1000" // Change to match your GID
-		},
-		"options": ["--pull"]
-	},
-	...
-	"runArgs": [
-		"--network=host",
-		"--cap-add=SYS_PTRACE",
-		"--security-opt=seccomp:unconfined",
-		"--security-opt=apparmor:unconfined",
-		// X11 host
-		"--volume=/tmp/.X11-unix:/tmp/.X11-unix:rw",
-		// Wayland host
-		"--volume=/mnt/wslg:/mnt/wslg",
-		// uncomment to use intel iGPU
-		// "--device=/dev/dri"
-		// Share user run time settings
-		"--volume=/run/user/1000:/run/user/1000", // Change 1000 to match your UID
-		"--ipc=host"
-	],
+ "build": {
+  "args": {
+   ...
+   // "USERNAME": "ros",
+   // "USER_UID": "1000", //Change to match your UID
+   // "USER_GID": "1000" // Change to match your GID
+  },
+ },
+ ...
+ "runArgs": [
+  ...
+  "--volume=/run/user/1000:/run/user/1000", // Change 1000 to match your UID
+  ...
+ ],
 ```
 
-
-## XDisplay
+### XDisplay
 
 If you see the error:
 
-```
-Couldnt open X display in GLXGLSupport::getGLDisplay at ./.obj-x86_64-linux-gnu/ogre_vendor-prefix/src/ogre_vendor/RenderSystems/GLSupport/src/GLX/OgreGLXGLSupport.cpp
+```text
+Couldn't open X display in GLXGLSupport::getGLDisplay at ./.obj-x86_64-linux-gnu/ogre_vendor-prefix/src/ogre_vendor/RenderSystems/GLSupport/src/GLX/OgreGLXGLSupport.cpp
 ```
 
 You need to remove or comment out the wayland options
 
-```
-	"runArgs": [
-		"--network=host",
-		"--cap-add=SYS_PTRACE",
-		"--security-opt=seccomp:unconfined",
-		"--security-opt=apparmor:unconfined",
-		// X11 host
-		"--volume=/tmp/.X11-unix:/tmp/.X11-unix:rw",
-  		"--volume=/tmp/.docker.xauth:/tmp/.docker.xauth:ro",
-		// Wayland host
-		//"--volume=/mnt/wslg:/mnt/wslg",
-		// "--volume=/run/user/1000:/run/user/1000",
-		// uncomment to use intel iGPU
-		// "--device=/dev/dri"
-		"--ipc=host"
-	],
-	"remoteUser": "ros",
-	"containerEnv": {
-		"DISPLAY": "${localEnv:DISPLAY}", // Needed for GUI try ":0" for windows
-		"XAUTHORITY": "/tmp/.docker.xauth",
-		// For Wayland
-		// "WAYLAND_DISPLAY": "${localEnv:WAYLAND_DISPLAY}",
-		// "XDG_RUNTIME_DIR": "${localEnv:XDG_RUNTIME_DIR}",
-		// "QT_QPA_PLATFORM": "wayland", // Force Wayland
-		// For audio
-		"PULSE_SERVER": "${localEnv:PULSE_SERVER}",
-		"LIBGL_ALWAYS_SOFTWARE": "1" // Needed for software rendering of opengl
-	},
+```jsonc
+ "runArgs": [
+  ...
+  // Wayland host
+  //"--volume=/mnt/wslg:/mnt/wslg",
+  // "--volume=/run/user/1000:/run/user/1000",
+  // uncomment to use intel iGPU
+  // "--device=/dev/dri"
+  ...
+ ],
+ ...
+  "containerEnv": {
+  ...
+  // For Wayland
+  // "WAYLAND_DISPLAY": "${localEnv:WAYLAND_DISPLAY}",
+  // "XDG_RUNTIME_DIR": "${localEnv:XDG_RUNTIME_DIR}",
+  // "QT_QPA_PLATFORM": "wayland", // Force Wayland
+  ...
+ },
 ```
 
 ### WSL2
@@ -191,16 +177,16 @@ This is likely because the DISPLAY environment variable is not getting set prope
 
       In your WSL2 Ubuntu instance
 
-      ```
+      ```bash
       echo $DISPLAY
       ```
 
 2. Copy that value into the `.devcontainer/devcontainer.json` file
 
       ```jsonc
-      	"containerEnv": {
-		      "DISPLAY": ":0",
-         }
+      "containerEnv": {
+        "DISPLAY": ":0",
+      }
       ```
 
 #### I want to use vGPU
@@ -208,37 +194,36 @@ This is likely because the DISPLAY environment variable is not getting set prope
 If you want to access the vGPU through WSL2, you'll need to add additional components to the `.devcontainer/devcontainer.json` file in accordance to [these directions](https://github.com/microsoft/wslg/blob/main/samples/container/Containers.md)
 
 ```jsonc
-	"runArgs": [
-		"--network=host",
-		"--cap-add=SYS_PTRACE",
-		"--security-opt=seccomp:unconfined",
-		"--security-opt=apparmor:unconfined",
-		"--volume=/tmp/.X11-unix:/tmp/.X11-unix",
-		"--volume=/mnt/wslg:/mnt/wslg",
-		"--volume=/usr/lib/wsl:/usr/lib/wsl",
-		"--device=/dev/dxg",
-      		"--gpus=all"
-	],
-	"containerEnv": {
-		"DISPLAY": "${localEnv:DISPLAY}", // Needed for GUI try ":0" for windows
-		"WAYLAND_DISPLAY": "${localEnv:WAYLAND_DISPLAY}",
-		"XDG_RUNTIME_DIR": "${localEnv:XDG_RUNTIME_DIR}",
-		"PULSE_SERVER": "${localEnv:PULSE_SERVER}",
-		"LD_LIBRARY_PATH": "/usr/lib/wsl/lib",
-		"LIBGL_ALWAYS_SOFTWARE": "1" // Needed for software rendering of opengl
-	},
+ "runArgs": [
+  "--network=host",
+  "--cap-add=SYS_PTRACE",
+  "--security-opt=seccomp:unconfined",
+  "--security-opt=apparmor:unconfined",
+  "--volume=/tmp/.X11-unix:/tmp/.X11-unix",
+  "--volume=/mnt/wslg:/mnt/wslg",
+  "--volume=/usr/lib/wsl:/usr/lib/wsl",
+  "--device=/dev/dxg",
+  "--gpus=all"
+ ],
+ "containerEnv": {
+  "DISPLAY": "${localEnv:DISPLAY}", // Needed for GUI try ":0" for windows
+  "WAYLAND_DISPLAY": "${localEnv:WAYLAND_DISPLAY}",
+  "XDG_RUNTIME_DIR": "${localEnv:XDG_RUNTIME_DIR}",
+  "PULSE_SERVER": "${localEnv:PULSE_SERVER}",
+  "LD_LIBRARY_PATH": "/usr/lib/wsl/lib",
+  "LIBGL_ALWAYS_SOFTWARE": "1" // Needed for software rendering of opengl
+ },
 ```
 
 ### Repos are not showing up in VS Code source control
 
-This is likely because vscode doesn't necessarily know about other repositories unless you've added them directly. 
+This is likely because vscode doesn't necessarily know about other repositories unless you've added them directly.
 
-```
+```text
 File->Add Folder To Workspace
 ```
 
 ![Screenshot-26](https://github.com/athackst/vscode_ros2_workspace/assets/6098197/d8711320-2c16-463b-9d67-5bd9314acc7f)
-
 
 Or you've added them as a git submodule.
 
@@ -251,3 +236,42 @@ python3 .devcontainer/repos_to_submodules.py
 ```
 
 or run the task titled `add submodules from .repos`
+
+### Error handling for GPU acceleration
+
+#### Docker image cannot be built:
+
+The dockerfile can be built but using devcontainer.json results in error messages like "docker container cannot connect to device [[gpu]]" means docker itself is installed, but not the above mentioned nvidia part.
+
+Solution is, to follow the guide and the test with nvidia-smi as indicated here:
+
+- [docker-nvidia(for GPU acceleration on Nvidia GPU hosts)](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
+
+#### Programs in Docker cannot access GPU
+
+Error messages that show lacking GPU acceleration (in docker terminal)
+
+```bash
+sudo apt-get update   && sudo apt-get install -y -qq glmark2   && glmark2
+```
+
+results in:
+
+```bash
+   libGL error: No matching fbConfigs or visuals found
+   libGL error: failed to load driver: swrast
+      X Error of failed request:  GLXBadContext
+   Major opcode of failed request:  151 (GLX)
+   Minor opcode of failed request:  6 (X_GLXIsDirect)
+   Serial number of failed request:  48
+   Current serial number in output stream:  47
+```
+
+Solution is, to follow the guide and the test with nvidia-smi as indicated here: 
+[docker-nvidia(for GPU acceleration on Nvidia GPU hosts)](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker)
+
+#### more information
+
+https://wiki.ros.org/docker/Tutorials/GUI
+https://medium.com/@benjamin.botto/opengl-and-cuda-applications-in-docker-af0eece000f1
+https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker

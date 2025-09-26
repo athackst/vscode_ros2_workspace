@@ -18,8 +18,60 @@ RUN apt-get update \
     libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-util1 \
     libxcb-xinerama0 libxcb-xkb1 libxkbcommon0 libxkbcommon-x11-0 \
     libglu1-mesa libxi6 libsm6 libxrender1 libfontconfig1 \
-  && rm -rf /var/lib/apt/lists/*
+   # Clean up
+    && apt-get autoremove -y \
+    && apt-get clean -y \
+    && rm -rf /var/lib/apt/lists/*
 ENV DEBIAN_FRONTEND=dialog
+
+### For Windows, uncomment the following lines to install WSLg dependencies and utilize vGPU acceleration 
+# ENV DEBIAN_FRONTEND=noninteractive
+# RUN apt-get update \
+#    && apt-get -y install \
+#           vainfo \
+#           mesa-va-drivers \
+#           mesa-utils \
+#    # Clean up
+#         && apt-get autoremove -y \
+#         && apt-get clean -y \
+#         && rm -rf /var/lib/apt/lists/*
+# ENV LIBVA_DRIVER_NAME=d3d12
+# ENV LD_LIBRARY_PATH=/usr/lib/wsl/lib
+# CMD vainfo --display drm --device /dev/dri/card0
+# ENV DEBIAN_FRONTEND=dialog
+
+################
+# uncomment below for nvidia support
+# Expose the nvidia driver to allow opengl 
+# Dependencies for glvnd and X11.
+################
+# RUN apt-get update \
+#  && apt-get install -y -qq --no-install-recommends \
+#   libglvnd0 \
+#   libgl1 \
+#   libglx0 \
+#   libegl1 \
+#   libxext6 \
+#   libx11-6 \
+# && rm -rf /var/lib/apt/lists/*
+
+# Env vars for the nvidia-container-runtime.
+#ENV NVIDIA_VISIBLE_DEVICES all
+#ENV NVIDIA_DRIVER_CAPABILITIES graphics,utility,compute
+
+#ENV QT_X11_NO_MITSHM=1
+
+# ** [Optional] Uncomment this section to install additional packages. **
+#
+# ENV DEBIAN_FRONTEND=noninteractive
+# RUN apt-get update \
+#    && apt-get -y install --no-install-recommends <your-package-list-here> \
+#    #
+#    # Clean up
+#    && apt-get autoremove -y \
+#    && apt-get clean -y \
+#    && rm -rf /var/lib/apt/lists/*
+# ENV DEBIAN_FRONTEND=dialog
 
 # Set up auto-source of workspace for ros 
 ARG USERNAME=ros
