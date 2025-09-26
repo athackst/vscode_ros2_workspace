@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://athackst.github.io/vscode_ros2_workspace/</loc>
-         <lastmod>2023-07-06</lastmod>
+         <loc>https://athackst.github.io/vscode_ros2_workspace/LICENSE/</loc>
+         <lastmod>2025-09-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://athackst.github.io/vscode_ros2_workspace/LICENSE/</loc>
-         <lastmod>2023-07-06</lastmod>
+         <loc>https://athackst.github.io/vscode_ros2_workspace/</loc>
+         <lastmod>2025-09-26</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
