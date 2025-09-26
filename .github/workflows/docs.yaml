@@ -12,6 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Build and push docs
         uses: athackst/mkdocs-simple-plugin@v3.2.0
