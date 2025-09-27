@@ -68,6 +68,6 @@
         ".vscode-insiders",
         ".devcontainer/devcontainer.json"
     ],
-    "ament-task-provider.envSetup": "source /opt/ros/jazzy/setup.bash",
-    "ROS2.distro": "jazzy",
+    "ament-task-provider.envSetup": "source /opt/ros/rolling/setup.bash",
+    "ROS2.distro": "rolling"
 }
