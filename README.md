@@ -62,6 +62,7 @@ Click on "use this template"
 On the next dialog, name the repository you would like to start and decide if you want all of the branches, or the default branch.
 
 > [!IMPORTANT]
+> 
 > The new default branch supports any version of ROS by setting the appropriate version you want in the 'FROM' line in `.devcontainer/Dockerfile`
 >
 > By default, this is set to `osrf/ros:jazzy-desktop-full`
