@@ -21,7 +21,7 @@ jobs:
           vcs import --skip-existing < src/ros2.repos src \
           && apt-get update \
           && rosdep update \
-          && rosdep install --from-paths src --ignore-src -y --rosdistro=humble \
+          && rosdep install --from-paths src --ignore-src -y --rosdistro=galactic \
           && colcon build --cmake-args '-DCMAKE_BUILD_TYPE=Release' -Wall -Wextra -Wpedantic \
           && source install/setup.bash \
           && colcon test \

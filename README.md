@@ -52,7 +52,7 @@ Click on "use this template"
 
 ### Create your repository
 
-On the next dialog, name the repository you would like to start and decide if you want all of the branches, or just the latest LTS: humble.
+On the next dialog, name the repository you would like to start and decide if you want all of the branches, or just the latest LTS: foxy.
 
 ![template_new](https://user-images.githubusercontent.com/6098197/91332035-713ee980-e780-11ea-81d3-13b170f568b0.png)
 
