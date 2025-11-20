@@ -18,7 +18,7 @@ jobs:
     steps:
       - 
         name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       -
         name: Test
         uses: ./.github/actions/test/
@@ -33,7 +33,7 @@ jobs:
     steps:
       - 
         name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       -
         name: Run linter
         uses: ./.github/actions/lint/
