@@ -4,10 +4,8 @@
 	"dockerFile": "Dockerfile",
 	"build": {
 		"args": {
-			"WORKSPACE": "${containerWorkspaceFolder}"
-			// "USERNAME": "ros",
-			// "USER_UID": "1000", //Change to match your UID
-			// "USER_GID": "1000" // Change to match your GID
+			"ROS_DISTRO": "jazzy",
+			"ROS_VARIANT": "full"
 		},
 		"options": ["--pull"]
 	},
